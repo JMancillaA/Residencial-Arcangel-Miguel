@@ -7,15 +7,19 @@ pipeline {
         checkout scm
       }
     }
+
     stage('Publish HTML') {
       steps {
-        // Crear carpeta de salida si no existe
+        // 1) Asegurarse de que exista la carpeta output
         bat 'if not exist output mkdir output'
-        // Buscar recursivamente .html y copiarlos a output
+
+        // 2) Copiar el index.html de la raíz a output
         bat '''
-          for /R %%F in (*.html) do (
-            echo Copiando %%~nxF
-            copy /Y "%%F" output\\
+          if exist index.html (
+            copy /Y index.html output\\
+          ) else (
+            echo ERROR: index.html no encontrado en la raíz del workspace
+            exit /b 1
           )
         '''
       }
