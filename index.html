@@ -255,7 +255,7 @@
         <a href="#" class="tab-link" onclick="openTab(event, 'contactos')">Contactos</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'reseñas')">Reseñas</a>
     </nav>
-    
+    <a href="#top" id="backToTop" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #1abc9c; color: white; padding: 10px 15px; border-radius: 50%; text-align: center; font-size: 20px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">↑</a>
     <div id="inicio" class="tab-content active">
         <h2>Bienvenido a Residencial Arcángel Miguel</h2>
         <p>El mejor lugar para hospedarse en la ciudad de Oruro, conocida por su famoso carnaval y rica cultura.</p>
@@ -496,6 +496,17 @@
         toggleButton.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+        });
+    </script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+    
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
         });
     </script>
 </body>
