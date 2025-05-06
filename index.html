@@ -237,6 +237,97 @@
     .dark-mode .promotions ul li {
         color: #cccccc;
     }
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .carousel-prev {
+            left: 10px;
+        }
+        
+        .carousel-next {
+            right: 10px;
+        }
+        
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        
+        .carousel-indicator.active {
+            background-color: white;
+        }
+        
+        .dark-mode .carousel-caption {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .dark-mode .carousel-prev, .dark-mode .carousel-next {
+            background-color: rgba(0,0,0,0.7);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -407,6 +498,39 @@
         <h2>Nuestras Habitaciones</h2>
         <p>Ofrecemos diferentes tipos de habitaciones para satisfacer sus necesidades de hospedaje, todas equipadas con comodidades modernas y un ambiente acogedor.</p>
         
+        <!-- Carousel Start -->
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="habitacion_simple.jpg" alt="Habitación Simple">
+                    <div class="carousel-caption">Habitación Simple - Confort y Comodidad</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="habitacion_doble.jpg" alt="Habitación Doble">
+                    <div class="carousel-caption">Habitación Doble - Espacio para Compartir</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="habitacion_matrimonial.jpg" alt="Habitación Matrimonial">
+                    <div class="carousel-caption">Habitación Matrimonial - Elegancia y Confort</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="bano.jpg" alt="Baño Moderno">
+                    <div class="carousel-caption">Baños Modernos - Duchas Calientes 24/7</div>
+                </div>
+            </div>
+            
+            <button class="carousel-prev">❮</button>
+            <button class="carousel-next">❯</button>
+            
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+        
         <div class="room-types">
             <div class="room-card">
                 <img src="habitacion_simple.jpg" alt="Habitación Simple">
@@ -507,6 +631,59 @@
             } else {
                 backToTopButton.style.display = 'none';
             }
+        });
+    </script>
+    <script>
+        // Carousel JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.querySelector('.carousel-prev');
+            const nextButton = document.querySelector('.carousel-next');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            
+            function goToSlide(slideIndex) {
+                if (slideIndex < 0) {
+                    slideIndex = slideCount - 1;
+                } else if (slideIndex >= slideCount) {
+                    slideIndex = 0;
+                }
+                
+                carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+                currentSlide = slideIndex;
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            prevButton.addEventListener('click', () => {
+                goToSlide(currentSlide - 1);
+            });
+            
+            nextButton.addEventListener('click', () => {
+                goToSlide(currentSlide + 1);
+            });
+            
+            // Setup indicators click
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
         });
     </script>
 </body>
