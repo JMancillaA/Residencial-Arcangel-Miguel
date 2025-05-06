@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residencial Oruro - Su hogar en el corazón de Bolivia</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
+        }
+        
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #1abc9c;
+        }
+        
+        nav a.active {
+            background-color: #1abc9c;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 20px;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .gallery img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .tourism-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .tourism-item img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Residencial Oruro</h1>
+        <p>Su hogar en el corazón de Bolivia</p>
+    </header>
+    
+    <nav>
+        <a href="#" class="tab-link active" onclick="openTab(event, 'inicio')">Inicio</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'ubicacion')">Ubicación</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'turismo')">Turismo</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'contactos')">Contactos</a>
+    </nav>
+    
+    <div id="inicio" class="tab-content active">
+        <h2>Bienvenido a Residencial Oruro</h2>
+        <p>El mejor lugar para hospedarse en la ciudad de Oruro, conocida por su famoso carnaval y rica cultura.</p>
+        
+        <div class="gallery">
+            <img src="placeholder1.jpg" alt="Habitación Premium">
+            <img src="placeholder2.jpg" alt="Área Común">
+            <img src="placeholder3.jpg" alt="Vista Exterior">
+        </div>
+        
+        <h3>Nuestros Servicios</h3>
+        <ul>
+            <li>Habitaciones confortables</li>
+            <li>Wifi gratuito</li>
+            <li>Estacionamiento privado</li>
+            <li>Desayuno incluido</li>
+            <li>Servicio de lavandería</li>
+            <li>Recepción 24/7</li>
+        </ul>
+    </div>
+    
+    <div id="ubicacion" class="tab-content">
+        <h2>Ubicación</h2>
+        <p>Estamos ubicados estratégicamente en el centro de la ciudad de Oruro, a pocos minutos de los principales atractivos turísticos.</p>
+        
+        <p><strong>Dirección:</strong> Calle Bolívar #123, entre Potosí y Sucre, Oruro, Bolivia</p>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60455.89429780723!2d-67.15677833644659!3d-17.970737765860936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b0ed3cc15a8f%3A0x99ca3954655c604f!2sOruro!5e0!3m2!1ses!2sbo!4v1621879821842!5m2!1ses!2sbo" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+        <h3>Cómo llegar</h3>
+        <ul>
+            <li><strong>Desde el aeropuerto:</strong> 15 minutos en taxi (aproximadamente)</li>
+            <li><strong>Desde la terminal de buses:</strong> 10 minutos caminando</li>
+            <li><strong>Desde la Plaza Principal:</strong> 5 minutos caminando</li>
+        </ul>
+    </div>
+    
+    <div id="turismo" class="tab-content">
+        <h2>Turismo en Oruro</h2>
+        <p>Oruro es conocido mundialmente por su espectacular Carnaval, declarado Patrimonio Oral e Intangible de la Humanidad por la UNESCO. Además, ofrece diversos atractivos turísticos para explorar durante todo el año.</p>
+        
+        <div class="tourism-item">
+            <h3>Carnaval de Oruro</h3>
+            <img src="carnaval.jpg" alt="Carnaval de Oruro">
+            <p>Una celebración única que combina elementos católicos con tradiciones andinas. Las danzas folclóricas, los coloridos trajes y las máscaras hacen de este evento uno de los más importantes de Sudamérica.</p>
+        </div>
+        
+        <div class="tourism-item">
+            <h3>Santuario del Socavón</h3>
+            <img src="socavon.jpg" alt="Santuario del Socavón">
+            <p>El Templo del Socavón es un importante centro religioso y cultural, dedicado a la Virgen de la Candelaria, patrona de los mineros.</p>
+        </div>
+        
+        <div class="tourism-item">
+            <h3>Museo Antropológico Eduardo López Rivas</h3>
+            <img src="museo.jpg" alt="Museo Antropológico">
+            <p>Un importante museo que alberga colecciones arqueológicas y etnográficas que muestran la rica historia y cultura de la región.</p>
+        </div>
+    </div>
+    
+    <div id="contactos" class="tab-content">
+        <h2>Contactos</h2>
+        <p>Para reservas o consultas, no dude en contactarnos a través de cualquiera de los siguientes medios:</p>
+        
+        <div class="contact-info">
+            <p><strong>Teléfono:</strong> +591 2 5252525</p>
+            <p><strong>WhatsApp:</strong> +591 70707070</p>
+            <p><strong>Email:</strong> info@residencialoruro.com</p>
+        </div>
+        
+        <h3>Formulario de Contacto</h3>
+        <form>
+            <div style="margin-bottom: 15px;">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="mensaje">Mensaje:</label><br>
+                <textarea id="mensaje" name="mensaje" rows="5" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+            </div>
+            
+            <button type="submit" style="background-color: #1abc9c; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Enviar</button>
+        </form>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Residencial Oruro - Todos los derechos reservados</p>
+    </footer>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+            }
+            
+            // Remove active class from all tab links
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Show the current tab and add "active" class to the button
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
