@@ -1,6 +1,9 @@
 pipeline {
   agent any
-
+  triggers {
+    // Cada minuto comprueba si hay commits nuevos
+    pollSCM('*/1 * * * *')
+  }
   // Variables de entorno para parametrizar rutas
   environment {
     // Ruta de despliegue en la máquina local
