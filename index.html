@@ -157,6 +157,56 @@
         .dark-mode .review p {
             color: #cccccc;
         }
+        .room-types {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .room-card {
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .room-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .amenity {
+            width: 120px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .amenity i {
+            font-size: 2.5rem;
+            color: #1abc9c;
+            margin-bottom: 10px;
+        }
+        
+        .dark-mode .room-card {
+            background-color: #1e1e1e;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        
+        .dark-mode .amenity i {
+            color: #2ecc71;
+        }
         .promotions {
         background-color: #f9f9f9;
         padding: 20px;
@@ -188,6 +238,7 @@
         color: #cccccc;
     }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -198,6 +249,7 @@
     
     <nav>
         <a href="#" class="tab-link active" onclick="openTab(event, 'inicio')">Inicio</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'habitaciones')">Habitaciones</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'ubicacion')">Ubicación</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'turismo')">Turismo</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'contactos')">Contactos</a>
@@ -349,6 +401,69 @@
             
             <button type="submit" style="background-color: #1abc9c; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Enviar</button>
         </form>
+    </div>
+    
+    <div id="habitaciones" class="tab-content">
+        <h2>Nuestras Habitaciones</h2>
+        <p>Ofrecemos diferentes tipos de habitaciones para satisfacer sus necesidades de hospedaje, todas equipadas con comodidades modernas y un ambiente acogedor.</p>
+        
+        <div class="room-types">
+            <div class="room-card">
+                <img src="habitacion_simple.jpg" alt="Habitación Simple">
+                <h3>Habitación Simple</h3>
+                <p>Perfecta para el viajero individual, equipada con una cama individual cómoda y todas las comodidades necesarias.</p>
+                <p><strong>Desde:</strong> 150 Bs/noche</p>
+            </div>
+            
+            <div class="room-card">
+                <img src="habitacion_doble.jpg" alt="Habitación Doble">
+                <h3>Habitación Doble</h3>
+                <p>Espaciosa habitación con dos camas individuales, ideal para amigos o compañeros de viaje.</p>
+                <p><strong>Desde:</strong> 200 Bs/noche</p>
+            </div>
+            
+            <div class="room-card">
+                <img src="habitacion_matrimonial.jpg" alt="Habitación Matrimonial">
+                <h3>Habitación Matrimonial</h3>
+                <p>Confortable habitación con cama matrimonial, perfecta para parejas o quienes buscan más espacio.</p>
+                <p><strong>Desde:</strong> 220 Bs/noche</p>
+            </div>
+        </div>
+        
+        <h3>Todas nuestras habitaciones incluyen:</h3>
+        
+        <div class="amenities">
+            <div class="amenity">
+                <i class="fas fa-tv"></i>
+                <h4>TV Cable</h4>
+                <p>Disfrute de diversos canales para su entretenimiento</p>
+            </div>
+            
+            <div class="amenity">
+                <i class="fas fa-shower"></i>
+                <h4>Ducha Caliente</h4>
+                <p>Agua caliente disponible 24/7</p>
+            </div>
+            
+            <div class="amenity">
+                <i class="fas fa-wifi"></i>
+                <h4>Internet</h4>
+                <p>WiFi gratuito de alta velocidad</p>
+            </div>
+            
+            <div class="amenity">
+                <i class="fas fa-video"></i>
+                <h4>Seguridad</h4>
+                <p>Cámaras de seguridad en áreas comunes</p>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 30px;">
+            <strong>¿Listo para reservar?</strong> Contáctenos directamente para obtener nuestras mejores tarifas y disponibilidad.
+        </p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" onclick="openTab(event, 'contactos')" style="background-color: #1abc9c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Reservar Ahora</a>
+        </div>
     </div>
     
     <footer>
