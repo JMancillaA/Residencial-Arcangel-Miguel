@@ -1,23 +1,30 @@
 pipeline {
   agent any
+
   stages {
     stage('Checkout') {
-      steps { checkout scm }
+      steps {
+        checkout scm
+      }
     }
+
     stage('Publish HTML') {
       steps {
-        // Sólo copia los archivos .html a la carpeta de salida
-        sh 'mkdir -p output && cp -r **/*.html output/'
+        // Crear carpeta de salida
+        bat 'if not exist output mkdir output'
+        // Copiar todos los .html al directorio output
+        bat 'xcopy /E /I /Y *.html output\\'
       }
     }
   }
+
   post {
     always {
-      publishHTML (target: [
-        reportDir: 'output',
-        reportFiles: 'index.html',
-        reportName: 'Sitio HTML'
-      ])
+      publishHTML target: [
+        reportDir:    'output',
+        reportFiles:  'index.html',
+        reportName:   'Sitio HTML'
+      ]
     }
   }
 }
