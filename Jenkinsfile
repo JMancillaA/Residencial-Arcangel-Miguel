@@ -7,13 +7,17 @@ pipeline {
         checkout scm
       }
     }
-
     stage('Publish HTML') {
       steps {
-        // Crear carpeta de salida
+        // Crear carpeta de salida si no existe
         bat 'if not exist output mkdir output'
-        // Copiar todos los .html al directorio output
-        bat 'xcopy /E /I /Y *.html output\\'
+        // Buscar recursivamente .html y copiarlos a output
+        bat '''
+          for /R %%F in (*.html) do (
+            echo Copiando %%~nxF
+            copy /Y "%%F" output\\
+          )
+        '''
       }
     }
   }
@@ -21,9 +25,9 @@ pipeline {
   post {
     always {
       publishHTML target: [
-        reportDir:    'output',
-        reportFiles:  'index.html',
-        reportName:   'Sitio HTML'
+        reportDir:   'output',
+        reportFiles: 'index.html',
+        reportName:  'Sitio HTML'
       ]
     }
   }
