@@ -106,12 +106,44 @@
             object-fit: cover;
             border-radius: 5px;
         }
+        .dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+        }
+
+        .dark-mode header,
+        .dark-mode footer {
+            background-color: #1c1c1c;
+        }
+
+        .dark-mode nav {
+        background-color: #1c1c1c;
+        }
+
+        .dark-mode nav a {
+            color: #ffffff;
+        }
+
+        .dark-mode nav a:hover {
+            background-color: #333333;
+        }
+
+        .dark-mode .tab-content {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .dark-mode button {
+            background-color: #333333;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Residencial Oruro</h1>
         <p>Su hogar en el corazón de Bolivia</p>
+        <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Modo Oscuro</button>
     </header>
     
     <nav>
@@ -238,6 +270,13 @@
             document.getElementById(tabName).className += " active";
             evt.currentTarget.className += " active";
         }
+    </script>
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+        });
     </script>
 </body>
 </html>
