@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  triggers {
+    // Cada minuto comprueba si hay commits nuevos
+    pollSCM('H/1 * * * *')
+  }
+
   stages {
     stage('Checkout') {
       steps {
