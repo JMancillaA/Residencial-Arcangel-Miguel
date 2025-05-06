@@ -328,6 +328,34 @@
         .dark-mode .carousel-prev, .dark-mode .carousel-next {
             background-color: rgba(0,0,0,0.7);
         }
+        .garage-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .garage-icon {
+            font-size: 3rem;
+            color: #1abc9c;
+            margin-right: 20px;
+        }
+        
+        .garage-content h3 {
+            margin-top: 0;
+        }
+        
+        .dark-mode .garage-section {
+            background-color: #1e1e1e;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-mode .garage-icon {
+            color: #2ecc71;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -364,6 +392,18 @@
             <li>Estacionamiento privado</li>
             <li>Recepción 24/7</li>
         </ul>
+        
+        <!-- Garage Section -->
+        <div class="garage-section">
+            <div class="garage-icon">
+                <i class="fas fa-car"></i>
+            </div>
+            <div class="garage-content">
+                <h3>Garaje para Huéspedes</h3>
+                <p>Ofrecemos estacionamiento seguro para su vehículo durante toda su estadía. Nuestro garaje cuenta con vigilancia las 24 horas para su tranquilidad.</p>
+            </div>
+        </div>
+        
         <div class="promotions">
             <h3>Promociones Especiales</h3>
             <ul>
