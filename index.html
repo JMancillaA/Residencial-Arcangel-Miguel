@@ -137,6 +137,26 @@
             background-color: #333333;
             color: #ffffff;
         }
+        .review {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .review p {
+            margin: 5px 0;
+        }
+        .dark-mode .review {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .review p {
+            color: #cccccc;
+        }
     </style>
 </head>
 <body>
@@ -151,6 +171,7 @@
         <a href="#" class="tab-link" onclick="openTab(event, 'ubicacion')">Ubicación</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'turismo')">Turismo</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'contactos')">Contactos</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'reseñas')">Reseñas</a>
     </nav>
     
     <div id="inicio" class="tab-content active">
@@ -211,6 +232,52 @@
             <img src="museo.jpg" alt="Museo Antropológico">
             <p>Un importante museo que alberga colecciones arqueológicas y etnográficas que muestran la rica historia y cultura de la región.</p>
         </div>
+    </div>
+
+    <div id="reseñas" class="tab-content">
+        <h2>Reseñas de Nuestros Clientes</h2>
+        <p>Esto es lo que nuestros huéspedes dicen sobre su experiencia en Residencial Oruro:</p>
+        
+        <div class="review">
+            <p><strong>Juan Pérez:</strong> "Excelente lugar para hospedarse. Las habitaciones son cómodas y el personal es muy amable. ¡Definitivamente volveré!"</p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        
+        <div class="review">
+            <p><strong>María López:</strong> "La ubicación es perfecta, cerca de todo. Además, el desayuno fue delicioso. Muy recomendado."</p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        
+        <div class="review">
+            <p><strong>Carlos García:</strong> "El servicio al cliente es excepcional. Me ayudaron con todo lo que necesitaba durante mi estadía."</p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        
+        <h3>Deja tu Reseña</h3>
+        <form>
+            <div style="margin-bottom: 15px;">
+                <label for="nombreReseña">Nombre:</label><br>
+                <input type="text" id="nombreReseña" name="nombreReseña" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="comentario">Comentario:</label><br>
+                <textarea id="comentario" name="comentario" rows="5" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="calificacion">Calificación:</label><br>
+                <select id="calificacion" name="calificacion" style="width: 100%; padding: 8px; box-sizing: border-box;">
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+            </div>
+            
+            <button type="submit" style="background-color: #1abc9c; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Enviar Reseña</button>
+        </form>
     </div>
     
     <div id="contactos" class="tab-content">
