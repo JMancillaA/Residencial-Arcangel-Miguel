@@ -358,15 +358,19 @@
         }
 
         .logo {
-            max-width: 150px;
-            margin-bottom: 10px;
+            max-width: 100px;
+            margin-right: 20px;
         }
         
         .header-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
+        }
+        
+        .header-text {
+            text-align: left;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -375,8 +379,10 @@
     <header>
         <div class="header-content">
             <img src="logo.png" alt="Logo Residencial Arcángel Miguel" class="logo">
-            <h1>Residencial Arcángel Miguel</h1>
-            <p>Su hogar en el corazón de Bolivia</p>
+            <div class="header-text">
+                <h1>Residencial Arcángel Miguel</h1>
+                <p>Su hogar en el corazón de Bolivia</p>
+            </div>
         </div>
         <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Modo Oscuro</button>
     </header>
@@ -590,8 +596,8 @@
                     <div class="carousel-caption">Habitación Familiar - Elegancia y Confort</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="bano.jpg" alt="Baño Moderno">
-                    <div class="carousel-caption">Baños Modernos - Duchas Calientes 24/7</div>
+                    <img src="bano.jpg" alt="Baño privado">
+                    <div class="carousel-caption">Baños Privados y publicos - Duchas Calientes 24/7</div>
                 </div>
             </div>
             
@@ -612,21 +618,27 @@
                 <img src="habitacion_simple.jpg" alt="Habitación Simple">
                 <h3>Habitación Simple</h3>
                 <p>Perfecta para el viajero individual, equipada con una cama individual cómoda y todas las comodidades necesarias.</p>
-                <p><strong>Desde:</strong> 150 Bs/noche</p>
+                <p><strong>Desde:</strong> 70 Bs/noche</p>
             </div>
             
             <div class="room-card">
                 <img src="habitacion_doble.jpg" alt="Habitación Doble">
                 <h3>Habitación Doble</h3>
                 <p>Espaciosa habitación con dos camas individuales, ideal para amigos o compañeros de viaje.</p>
-                <p><strong>Desde:</strong> 200 Bs/noche</p>
+                <p><strong>Desde:</strong> 140 Bs/noche</p>
             </div>
             
             <div class="room-card">
                 <img src="habitacion_matrimonial.jpg" alt="Habitación Matrimonial">
                 <h3>Habitación Matrimonial</h3>
                 <p>Confortable habitación con cama matrimonial, perfecta para parejas o quienes buscan más espacio.</p>
-                <p><strong>Desde:</strong> 220 Bs/noche</p>
+                <p><strong>Desde:</strong> 140 Bs/noche</p>
+            </div>
+            <div class="room-card">
+                <img src="bano.jpg" alt="Baño privado">
+                <h3>Baño privado</h3>
+                <p>Baños Privados y publicos - Duchas Calientes 24/7.</p>
+                <p><strong>Desde:</strong> 200 Bs/noche</p>
             </div>
         </div>
         
@@ -667,7 +679,7 @@
     </div>
     
     <footer>
-        <p>&copy; 2024 Residencial Arcángel Miguel - Todos los derechos reservados</p>
+        <p>Residencial Arcángel Miguel - 2025/p>
     </footer>
     
     <script>

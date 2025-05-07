@@ -142,15 +142,19 @@
         }
 
         .logo {
-            max-width: 150px;
-            margin-bottom: 10px;
+            max-width: 100px;
+            margin-right: 20px;
         }
         
         .header-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
+        }
+        
+        .header-text {
+            text-align: left;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -159,8 +163,10 @@
     <header>
         <div class="header-content">
             <img src="logo.png" alt="Logo Residencial Arcángel Miguel" class="logo">
-            <h1>Residencial Arcángel Miguel</h1>
-            <p>Reclamos y Sugerencias</p>
+            <div class="header-text">
+                <h1>Residencial Arcángel Miguel</h1>
+                <p>Reclamos y Sugerencias</p>
+            </div>
         </div>
         <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Modo Oscuro</button>
     </header>
@@ -270,7 +276,7 @@
     </div>
     
     <footer>
-        <p>&copy; 2024 Residencial Arcángel Miguel - Todos los derechos reservados</p>
+        <p>Residencial Arcángel Miguel - 2025</p>
     </footer>
     
     <script>
