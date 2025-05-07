@@ -20,20 +20,22 @@ pipeline {
     stage('Publish HTML & Assets') {
       steps {
         bat '''
+          @echo off
+          rem — Purga el directorio output
           if exist output ( rmdir /S /Q output )
           mkdir output
 
-          rem — Copia todo EXCLUYENDO la propia carpeta output
+          rem — Copia recursiva excluyendo a sí mismo
           robocopy "%CD%" "output" /E /XD "output"
           set RC=%ERRORLEVEL%
 
+          rem — Si RC>=8 falla; si no, éxito
           if %RC% GEQ 8 (
             echo ERROR: fallo en ROBOCOPY al generar output (código %RC%)
             exit /b 1
+          ) else (
+            exit /b 0
           )
-
-          rem — Normalizamos a éxito para 0–7
-          exit /b 0
         '''
       }
     }
@@ -41,18 +43,20 @@ pipeline {
     stage('Deploy') {
       steps {
         bat '''
+          @echo off
           if not exist "%DEPLOY_DIR%" mkdir "%DEPLOY_DIR%"
 
-          rem — Deploy con normalización de exit code
+          rem — Replica output en DEPLOY_DIR
           robocopy "output" "%DEPLOY_DIR%" /E
           set RC=%ERRORLEVEL%
 
+          rem — Normaliza salida
           if %RC% GEQ 8 (
             echo ERROR: fallo en ROBOCOPY al desplegar (código %RC%)
             exit /b 1
+          ) else (
+            exit /b 0
           )
-
-          exit /b 0
         '''
       }
     }
