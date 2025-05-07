@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   triggers {
-    // Cada minuto
+    // Cada minuto: mantiene el pipeline “recursivo” sin colapsar
     pollSCM('*/1 * * * *')
   }
 
@@ -19,45 +19,64 @@ pipeline {
 
     stage('Publish HTML & Assets') {
       steps {
-        bat '''
+        bat label: 'Publish HTML & Assets', script: """
           @echo off
-          rem — Purga el directorio output
-          if exist output ( rmdir /S /Q output )
+          rem — Habilita expansión retrasada de variables
+          setlocal enabledelayedexpansion
+
+          rem — Purga el directorio output si existe
+          if exist output (
+            echo [Publish] Eliminando carpeta output anterior...
+            rmdir /S /Q output
+          )
           mkdir output
 
-          rem — Copia recursiva excluyendo su propio directorio para evitar ciclos
+          rem — Copia recursiva de TODO el workspace, excluyendo output
+          echo [Publish] Ejecutando ROBOCOPY desde %CD% hacia output...
           robocopy "%CD%" "output" /E /XD "output"
-          set RC=%ERRORLEVEL%
+          set RC=!ERRORLEVEL!
 
-          rem — Si RC>=8, fallo; de lo contrario, éxito
-          if %RC% GEQ 8 (
-            echo ERROR: fallo en ROBOCOPY al generar output (código %RC%)
+          echo [Publish] ROBOCOPY exit code: !RC!
+          rem — Sólo error si código ≥ 8
+          if !RC! GEQ 8 (
+            echo [Publish] ERROR: ROBOCOPY falló con código !RC!
             exit /b 1
           )
 
+          endlocal
+          echo [Publish] Completo exitosamente.
           exit /b 0
-        '''
+        """
       }
     }
 
     stage('Deploy') {
       steps {
-        bat '''
+        bat label: 'Deploy to Local', script: """
           @echo off
-          if not exist "%DEPLOY_DIR%" mkdir "%DEPLOY_DIR%"
+          setlocal enabledelayedexpansion
+
+          rem — Asegura carpeta de despliegue
+          if not exist "%DEPLOY_DIR%" (
+            echo [Deploy] Creando carpeta de despliegue...
+            mkdir "%DEPLOY_DIR%"
+          )
 
           rem — Replica output en DEPLOY_DIR
+          echo [Deploy] Ejecutando ROBOCOPY de output hacia %DEPLOY_DIR%...
           robocopy "output" "%DEPLOY_DIR%" /E
-          set RC=%ERRORLEVEL%
+          set RC=!ERRORLEVEL!
 
-          rem — Solo error si RC>=8
-          if %RC% GEQ 8 (
-            echo ERROR: fallo en ROBOCOPY al desplegar (código %RC%)
+          echo [Deploy] ROBOCOPY exit code: !RC!
+          if !RC! GEQ 8 (
+            echo [Deploy] ERROR: ROBOCOPY falló al desplegar (¡código !RC!!)
             exit /b 1
           )
 
+          endlocal
+          echo [Deploy] Despliegue completado.
           exit /b 0
-        '''
+        """
       }
     }
   }
