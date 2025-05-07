@@ -1,56 +1,58 @@
 pipeline {
   agent any
 
-  // Trigger cada minuto para simular iteraciones infinitas de una expansión modular
   triggers {
+    // Cada minuto
     pollSCM('*/1 * * * *')
   }
 
   environment {
-    // Espacio de despliegue local
     DEPLOY_DIR = 'C:\\Deployments\\Residencial'
   }
 
   stages {
     stage('Checkout') {
       steps {
-        // Inyección isomórfica del repositorio
         checkout scm
       }
     }
 
     stage('Publish HTML & Assets') {
       steps {
-        // 1) Purga el output anterior (como anular torsiones de un submódulo)
         bat '''
-          if exist output (
-            rmdir /S /Q output
-          )
+          if exist output ( rmdir /S /Q output )
           mkdir output
-        '''
-        // 2) Copia recursiva de todo el workspace,
-        //    excluyendo 'output' para mantener el grafo libre de ciclos.
-        bat '''
+
+          rem — Copia todo EXCLUYENDO la propia carpeta output
           robocopy "%CD%" "output" /E /XD "output"
-          if errorlevel 8 (
-            echo ERROR: fallo en ROBOCOPY al generar output
+          set RC=%ERRORLEVEL%
+
+          if %RC% GEQ 8 (
+            echo ERROR: fallo en ROBOCOPY al generar output (código %RC%)
             exit /b 1
           )
+
+          rem — Normalizamos a éxito para 0–7
+          exit /b 0
         '''
       }
     }
 
     stage('Deploy') {
       steps {
-        // 1) Asegura el subespacio de despliegue
-        bat "if not exist \"${DEPLOY_DIR}\" mkdir \"${DEPLOY_DIR}\""
-        // 2) Replica íntegramente 'output' en DEPLOY_DIR
         bat '''
+          if not exist "%DEPLOY_DIR%" mkdir "%DEPLOY_DIR%"
+
+          rem — Deploy con normalización de exit code
           robocopy "output" "%DEPLOY_DIR%" /E
-          if errorlevel 8 (
-            echo ERROR: fallo en ROBOCOPY al desplegar
+          set RC=%ERRORLEVEL%
+
+          if %RC% GEQ 8 (
+            echo ERROR: fallo en ROBOCOPY al desplegar (código %RC%)
             exit /b 1
           )
+
+          exit /b 0
         '''
       }
     }
@@ -58,7 +60,6 @@ pipeline {
 
   post {
     always {
-      // Publica el índice en la UI de Jenkins
       publishHTML target: [
         reportDir:   'output',
         reportFiles: 'index.html',
