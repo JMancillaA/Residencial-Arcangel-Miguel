@@ -1,12 +1,13 @@
 pipeline {
   agent any
+
+  // Dispara una comprobación cada minuto
   triggers {
-    // Cada minuto comprueba si hay commits nuevos
     pollSCM('*/1 * * * *')
   }
-  // Variables de entorno para parametrizar rutas
+
+  // Variables de entorno
   environment {
-    // Ruta de despliegue en la máquina local
     DEPLOY_DIR = 'C:\\Deployments\\Residencial'
   }
 
@@ -20,18 +21,15 @@ pipeline {
 
     stage('Publish HTML') {
       steps {
-        // 1) Crear la carpeta 'output' si no existe
-        bat 'if not exist output mkdir output'
-
-        // 2) Copiar index.html a output
+        // 1) Si existe 'output', eliminarla; luego crearla limpia
         bat '''
-          if exist index.html (
-            copy /Y index.html output\\
-          ) else (
-            echo ERROR: index.html no encontrado en la raíz del workspace
-            exit /b 1
+          if exist output (
+            rmdir /S /Q output
           )
+          mkdir output
         '''
+        // 2) Copiar recursivamente TODO el contenido del workspace a 'output'
+        bat 'xcopy /E /I /Y .\\* output\\'
       }
     }
 
@@ -39,8 +37,7 @@ pipeline {
       steps {
         // 1) Asegurarse de que exista el directorio de despliegue
         bat "if not exist \"${DEPLOY_DIR}\" mkdir \"${DEPLOY_DIR}\""
-
-        // 2) Copiar todo el contenido de output a DEPLOY_DIR
+        // 2) Copiar recursivamente todo el contenido de 'output' a DEPLOY_DIR
         bat "xcopy /E /I /Y output\\\\* \"${DEPLOY_DIR}\\\\\""
       }
     }
@@ -48,7 +45,7 @@ pipeline {
 
   post {
     always {
-      // Publicar el reporte HTML en Jenkins UI
+      // Publicar en la UI de Jenkins el sitio HTML generado
       publishHTML target: [
         reportDir:   'output',
         reportFiles: 'index.html',
