@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reclamos y Sugerencias - Residencial Arcángel Miguel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
+        }
+        
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: #1abc9c;
+        }
+        
+        .container {
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #16a085;
+        }
+        
+        .dark-mode {
+            background-color: #1C1C1C;
+            color: #ffffff;
+        }
+        
+        .dark-mode header, .dark-mode footer {
+            background-color: #1c1c1c;
+        }
+        
+        .dark-mode nav {
+            background-color: #1c1c1c;
+        }
+        
+        .dark-mode nav a {
+            color: #ffffff;
+        }
+        
+        .dark-mode nav a:hover, .dark-mode nav a.active {
+            background-color: #333333;
+        }
+        
+        .dark-mode .container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-mode button {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        
+        .dark-mode .form-group input, .dark-mode .form-group textarea, .dark-mode .form-group select {
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+        }
+        
+        .tips-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-left: 4px solid #1abc9c;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .tips-section {
+            background-color: #2c3e50;
+            border-left: 4px solid #1abc9c;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Residencial Arcángel Miguel</h1>
+        <p>Reclamos y Sugerencias</p>
+        <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Modo Oscuro</button>
+    </header>
+    
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="index.html#habitaciones">Habitaciones</a>
+        <a href="index.html#ubicacion">Ubicación</a>
+        <a href="index.html#turismo">Turismo</a>
+        <a href="index.html#contactos">Contactos</a>
+        <a href="index.html#reseñas">Reseñas</a>
+        <a href="reclamos-sugerencias.html" class="active">Reclamos y Sugerencias</a>
+    </nav>
+    
+    <div class="container">
+        <h2>Su opinión es importante para nosotros</h2>
+        <p>En Residencial Arcángel Miguel nos esforzamos por brindar el mejor servicio posible. Si tiene algún reclamo o sugerencia sobre cómo podemos mejorar, estaremos encantados de escucharle.</p>
+        
+        <form id="reclamos-form">
+            <div class="form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono (opcional):</label>
+                <input type="tel" id="telefono" name="telefono">
+            </div>
+            
+            <div class="form-group">
+                <label for="habitacion">Número de habitación (si aplica):</label>
+                <input type="text" id="habitacion" name="habitacion">
+            </div>
+            
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">-- Seleccione --</option>
+                    <option value="reclamo">Reclamo</option>
+                    <option value="sugerencia">Sugerencia</option>
+                    <option value="felicitacion">Felicitación</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="departamento">Departamento:</label>
+                <select id="departamento" name="departamento" required>
+                    <option value="">-- Seleccione --</option>
+                    <option value="recepcion">Recepción</option>
+                    <option value="habitaciones">Habitaciones</option>
+                    <option value="limpieza">Limpieza</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="seguridad">Seguridad</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="mensaje">Su reclamo o sugerencia:</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Enviar Formulario</button>
+        </form>
+        
+        <div class="tips-section">
+            <h3><i class="fas fa-lightbulb"></i> ¿Cómo podemos ayudarle mejor?</h3>
+            <p>Para poder atender su reclamo o sugerencia de manera más eficiente, le recomendamos:</p>
+            <ul>
+                <li>Sea específico sobre el problema o sugerencia</li>
+                <li>Incluya fechas y horarios si es relevante</li>
+                <li>Mencione nombres del personal involucrado (si aplica)</li>
+                <li>Proporcione información de contacto precisa para que podamos darle seguimiento</li>
+            </ul>
+            <p>Nos comprometemos a revisar y responder a todos los reclamos y sugerencias en un plazo máximo de 48 horas.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Residencial Arcángel Miguel - Todos los derechos reservados</p>
+    </footer>
+    
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+        });
+        
+        // Form submission
+        document.getElementById('reclamos-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('¡Gracias por su envío! Nos pondremos en contacto con usted a la brevedad posible.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
