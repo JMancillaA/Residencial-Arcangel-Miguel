@@ -25,17 +25,17 @@ pipeline {
           if exist output ( rmdir /S /Q output )
           mkdir output
 
-          rem — Copia recursiva excluyendo a sí mismo
+          rem — Copia recursiva excluyendo su propio directorio para evitar ciclos
           robocopy "%CD%" "output" /E /XD "output"
           set RC=%ERRORLEVEL%
 
-          rem — Si RC>=8 falla; si no, éxito
+          rem — Si RC>=8, fallo; de lo contrario, éxito
           if %RC% GEQ 8 (
             echo ERROR: fallo en ROBOCOPY al generar output (código %RC%)
             exit /b 1
-          ) else (
-            exit /b 0
           )
+
+          exit /b 0
         '''
       }
     }
@@ -50,13 +50,13 @@ pipeline {
           robocopy "output" "%DEPLOY_DIR%" /E
           set RC=%ERRORLEVEL%
 
-          rem — Normaliza salida
+          rem — Solo error si RC>=8
           if %RC% GEQ 8 (
             echo ERROR: fallo en ROBOCOPY al desplegar (código %RC%)
             exit /b 1
-          ) else (
-            exit /b 0
           )
+
+          exit /b 0
         '''
       }
     }
