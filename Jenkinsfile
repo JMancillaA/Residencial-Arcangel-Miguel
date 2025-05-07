@@ -1,35 +1,35 @@
 pipeline {
   agent any
 
-  // Dispara una verificación de repositorio cada minuto
+  // Trigger cada minuto para simular iteraciones infinitas de una expansión modular
   triggers {
     pollSCM('*/1 * * * *')
   }
 
   environment {
-    // Módulo de despliegue en la máquina local
+    // Espacio de despliegue local
     DEPLOY_DIR = 'C:\\Deployments\\Residencial'
   }
 
   stages {
     stage('Checkout') {
       steps {
-        // Inyección del repositorio como si fuese un isomorfismo de R‑espacios
+        // Inyección isomórfica del repositorio
         checkout scm
       }
     }
 
     stage('Publish HTML & Assets') {
       steps {
-        // 1) Purga el directorio 'output' si existe (elimina la torsión de niveles previos)
+        // 1) Purga el output anterior (como anular torsiones de un submódulo)
         bat '''
           if exist output (
             rmdir /S /Q output
           )
           mkdir output
         '''
-        // 2) Copia recursivamente todo el contenido del workspace,
-        //    excluyendo la propia carpeta 'output' para evitar ciclos.
+        // 2) Copia recursiva de todo el workspace,
+        //    excluyendo 'output' para mantener el grafo libre de ciclos.
         bat '''
           robocopy "%CD%" "output" /E /XD "output"
           if errorlevel 8 (
@@ -42,9 +42,9 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        // 1) Asegura la existencia del submódulo de despliegue
+        // 1) Asegura el subespacio de despliegue
         bat "if not exist \"${DEPLOY_DIR}\" mkdir \"${DEPLOY_DIR}\""
-        // 2) Replica todo el contenido de 'output' en DEPLOY_DIR
+        // 2) Replica íntegramente 'output' en DEPLOY_DIR
         bat '''
           robocopy "output" "%DEPLOY_DIR%" /E
           if errorlevel 8 (
@@ -58,8 +58,7 @@ pipeline {
 
   post {
     always {
-      // Publica en la UI de Jenkins el índice HTML,
-      // como si fuese la expansión de una serie de formas elípticas
+      // Publica el índice en la UI de Jenkins
       publishHTML target: [
         reportDir:   'output',
         reportFiles: 'index.html',
