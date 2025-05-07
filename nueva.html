@@ -6,20 +6,138 @@
     <title>Nueva Página</title>
     <link rel="stylesheet" href="styles.css"> <!-- Opcional: Enlace a un archivo CSS -->
     <style>
-        .logo {
-            max-width: 100px;
-            margin-right: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        
+
+        header {
+            background-color: #1abc9c;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
         .header-content {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
         }
-        
-        .header-text {
-            text-align: left;
+
+        .logo {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+
+        ul li a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        form input[type="email"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #16a085;
+        }
+
+        .galeria img {
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #16a085;
         }
     </style>
 </head>
@@ -40,38 +158,35 @@
             <h2>Contenido Principal</h2>
             <p>Esta es una nueva página creada para complementar el sitio web.</p>
         </section>
+        <section>
+            <h2>Enlaces Útiles</h2>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Suscríbete a Nuestro Boletín</h2>
+            <form>
+                <label for="email">Correo Electrónico:</label><br>
+                <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required style="padding: 8px; margin-top: 5px;"><br><br>
+                <button type="submit" style="padding: 10px 20px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Suscribirse</button>
+            </form>
+        </section>
+        <section>
+            <h2>Galería</h2>
+            <div style="display: flex; gap: 10px;">
+                <img src="logo.png" alt="Imagen 1" style="width: 100px; height: auto;">
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 Residencial Arcángel Miguel - Todos los derechos reservados</p>
+        <p>Síguenos en:
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+        </p>
     </footer>
-    <section>
-        <h2>Enlaces Útiles</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-        </ul>
-    </section>
-    <section>
-        <h2>Suscríbete a Nuestro Boletín</h2>
-        <form>
-            <label for="email">Correo Electrónico:</label><br>
-            <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required style="padding: 8px; margin-top: 5px;"><br><br>
-            <button type="submit" style="padding: 10px 20px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Suscribirse</button>
-        </form>
-    </section>
-    <section>
-        <h2>Galería</h2>
-        <div style="display: flex; gap: 10px;">
-            <img src="logo.png" alt="Imagen 1" style="width: 100px; height: auto;">
-        </div>
-    </section>
     <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">↑ Volver Arriba</button>
 </body>
-<footer>
-    <p>&copy; 2025 Residencial Arcángel Miguel - Todos los derechos reservados</p>
-    <p>Síguenos en:
-        <a href="https://facebook.com" target="_blank">Facebook</a> |
-        <a href="https://instagram.com" target="_blank">Instagram</a> |
-        <a href="https://twitter.com" target="_blank">Twitter</a>
-    </p>
-</footer>
 </html>
