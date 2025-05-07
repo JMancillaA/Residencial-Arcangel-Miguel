@@ -52,33 +52,29 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        bat label: 'Deploy to Local', script: """
+          bat '''
           @echo off
           setlocal enabledelayedexpansion
 
-          rem — Asegura carpeta de despliegue
-          if not exist "%DEPLOY_DIR%" (
-            echo [Deploy] Creando carpeta de despliegue...
-            mkdir "%DEPLOY_DIR%"
-          )
+          set "SRC=%WORKSPACE%\\output"
+          set "DST=C:\\Deployments\\Residencial"
 
-          rem — Replica output en DEPLOY_DIR
-          echo [Deploy] Ejecutando ROBOCOPY de output hacia %DEPLOY_DIR%...
-          robocopy "output" "%DEPLOY_DIR%" /E
-          set RC=!ERRORLEVEL!
-
+          rem Copia todo excepto la carpeta .git y el propio Jenkinsfile
+          robocopy "!SRC!" "!DST!" /E /DCOPY:DA /COPY:DAT ^
+                  /XD ".git" /XF Jenkinsfile
+          set "RC=!ERRORLEVEL!"
           echo [Deploy] ROBOCOPY exit code: !RC!
+
           if !RC! GEQ 8 (
-            echo [Deploy] ERROR: ROBOCOPY falló al desplegar (¡código !RC!!)
-            exit /b 1
+              echo [Deploy] **Fallo de Robocopy**
+              endlocal & exit /b 1
           )
 
-          endlocal
           echo [Deploy] Despliegue completado.
-          exit /b 0
-        """
+          endlocal & exit /b 0
+          '''
       }
-    }
+  }
   }
 
   post {
