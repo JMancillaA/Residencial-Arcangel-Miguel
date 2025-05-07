@@ -139,6 +139,47 @@
         button:hover {
             background-color: #16a085;
         }
+
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .carousel-images {
+            display: flex;
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            display: none;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -174,8 +215,14 @@
         </section>
         <section>
             <h2>Galería</h2>
-            <div style="display: flex; gap: 10px;">
-                <img src="logo.png" alt="Imagen 1" style="width: 100px; height: auto;">
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="bano.jpg" alt="Habitación" class="carousel-item">
+                    <img src="comedor.jpg" alt="Comedor" class="carousel-item">
+                    <img src="doble.jpeg" alt="Baño" class="carousel-item">
+                </div>
+                <button class="carousel-prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-next" onclick="nextSlide()">&#10095;</button>
             </div>
         </section>
     </main>
@@ -188,5 +235,28 @@
         </p>
     </footer>
     <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" style="position: fixed; bottom: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">↑ Volver Arriba</button>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        }
+
+        // Mostrar la primera imagen al cargar la página
+        showSlide(currentSlide);
+    </script>
 </body>
 </html>
