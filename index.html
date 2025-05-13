@@ -3,390 +3,944 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Residencial Arcángel Miguel - Su hogar en el corazón de Bolivia</title>
+    <title>Residencial Arcángel Miguel - Su hogar en la Capital del Folklore Boliviano</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --primary-color: #1abc9c;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c; /* Color for complaints */
+            --warning-color: #f39c12; /* Color for suggestions */
+            --info-color: #3498db;   /* Color for felicitations */
+            --dark-bg: #1c1c1c;
+            --dark-card-bg: #1e1e1e;
+            --dark-text: #ffffff;
+            --light-bg: #f5f5f5;
+            --light-card-bg: #ffffff;
+            --light-text: #333333;
+            --header-footer-bg: #2c3e50;
+            --nav-bg: #34495e;
+            --transition-speed: 0.3s;
+            --animation-speed: 0.6s;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            line-height: 1.6;
         }
-        
+
+        /* --- Header --- */
         header {
-            background-color: #2c3e50;
+            background-color: var(--header-footer-bg);
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem 1rem;
+            transition: background-color var(--transition-speed) ease;
         }
-        
+
+        .header-content {
+            display: flex;
+            flex-direction: column; /* Stack logo and text vertically on small screens */
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (min-width: 600px) { /* Row layout on larger screens */
+            .header-content {
+                flex-direction: row;
+            }
+            .header-text {
+                text-align: left; /* Align text left when next to logo */
+            }
+        }
+
+        .logo {
+            max-width: 80px; /* Slightly smaller logo */
+            margin-bottom: 10px; /* Space below logo on small screens */
+            transition: transform var(--transition-speed) ease;
+        }
+        .logo:hover {
+             transform: scale(1.1);
+        }
+        @media (min-width: 600px) {
+            .logo {
+                margin-right: 20px;
+                margin-bottom: 0;
+            }
+        }
+
+        .header-text h1 {
+            margin: 0.5rem 0 0.2rem 0;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        .header-text p {
+            margin: 0;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+        @media (min-width: 768px) {
+            .header-text h1 { font-size: 2.2rem; }
+            .header-text p { font-size: 1.1rem; }
+        }
+
+        /* --- Navigation --- */
         nav {
-            background-color: #34495e;
-            overflow: hidden;
+            background-color: var(--nav-bg);
+            overflow-x: auto; /* Allow horizontal scroll on small screens */
+            white-space: nowrap; /* Prevent wrapping */
+            position: sticky; /* Make nav sticky */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color var(--transition-speed) ease;
+             scrollbar-width: thin; /* Firefox */
+             scrollbar-color: var(--primary-color) var(--nav-bg); /* Firefox */
         }
-        
+         /* Webkit Scrollbar */
+        nav::-webkit-scrollbar { height: 6px; }
+        nav::-webkit-scrollbar-track { background: var(--nav-bg); }
+        nav::-webkit-scrollbar-thumb { background-color: var(--primary-color); border-radius: 6px; }
+
+
         nav a {
-            float: left;
-            display: block;
+            /* float: left; Remove float */
+            display: inline-block; /* Change to inline-block for horizontal scroll */
             color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            font-weight: 400;
+            font-size: 0.95rem;
         }
-        
+
         nav a:hover {
-            background-color: #1abc9c;
+            background-color: var(--primary-color);
+            color: white;
         }
-        
+
         nav a.active {
-            background-color: #1abc9c;
+            background-color: var(--primary-color);
+            font-weight: 600;
         }
-        
+
+        /* Responsive Nav: No longer floating, so media query might not be needed for stacking */
+        /* @media (max-width: 768px) { ... } */
+
+        /* --- Tab Content --- */
         .tab-content {
             display: none;
-            padding: 20px;
-            background-color: white;
-            margin: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            background-color: var(--light-card-bg);
+            margin: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            opacity: 0; /* Start hidden for fade-in */
+            transition: opacity var(--animation-speed) ease-in-out, background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
-        
+
         .tab-content.active {
             display: block;
+            opacity: 1; /* Fade in when active */
         }
-        
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 20px;
+
+        .tab-content h2 {
+            color: var(--header-footer-bg);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
         }
-        
+        .tab-content h2 i { /* Icon in title */
+            margin-right: 10px;
+        }
+        .tab-content h3 {
+            color: var(--nav-bg);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+         .tab-content h3 i { margin-right: 8px; }
+
+        /* --- Sections within Tabs --- */
+        section {
+            margin-bottom: 40px;
+        }
+         /* Ensure last section doesn't have excessive bottom margin */
+         .tab-content section:last-child {
+             margin-bottom: 0;
+         }
+
+        /* --- Gallery --- */
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        
-        .gallery img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            margin: 10px;
-            border-radius: 5px;
-        }
-        
-        .contact-info {
-            margin: 20px 0;
-        }
-        
-        .map-container {
-            width: 100%;
-            height: 400px;
+            gap: 15px; /* Spacing between images */
+            justify-content: center; /* Center images */
             margin-top: 20px;
         }
-        
+
+        .gallery img {
+            width: 100%; /* Full width on small screens */
+            max-width: 320px; /* Max width per image */
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        @media (min-width: 600px) {
+            .gallery img {
+                width: calc(50% - 10px); /* Two columns */
+            }
+        }
+         @media (min-width: 992px) {
+            .gallery img {
+                width: calc(33.33% - 10px); /* Three columns */
+            }
+        }
+
+
+        /* --- List Styles --- */
+         ul {
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+         }
+         ul li {
+            position: relative;
+            padding-left: 25px; /* Space for custom bullet */
+            margin-bottom: 10px;
+         }
+         ul li::before {
+            content: "\f00c"; /* Font Awesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 1px;
+         }
+
+        /* --- Garage Section --- */
+        .garage-section {
+            background-color: #eaf6f6; /* Light cyan background */
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column; /* Stack icon and text on small screens */
+            align-items: center;
+            text-align: center;
+            border-left: 5px solid var(--primary-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+        @media (min-width: 768px) { /* Side-by-side on larger screens */
+             .garage-section {
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start;
+             }
+             .garage-icon { margin-right: 25px; margin-bottom: 0; }
+        }
+
+        .garage-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px; /* Space below icon on small screens */
+            flex-shrink: 0; /* Prevent icon shrinking */
+        }
+
+        .garage-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--header-footer-bg);
+        }
+         .garage-content p {
+            margin-bottom: 0;
+            color: #555;
+         }
+
+        /* --- Promotions --- */
+        .promotions {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        .promotions h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: white; /* Ensure title is white */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 8px;
+        }
+        .promotions ul li::before {
+             content: "\f06b"; /* Font Awesome gift icon */
+             color: white;
+        }
+        .promotions ul li {
+            color: white; /* Ensure list items are white */
+            margin-bottom: 12px;
+        }
+
+
+        /* --- Location --- */
+        .location-info p { margin-bottom: 15px; }
+        .location-info strong { color: var(--nav-bg); }
+
+        .map-container {
+            width: 100%;
+            height: 450px; /* Slightly taller map */
+            margin-top: 25px;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures iframe respects border-radius */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 5px;
         }
-        
+
+        .directions ul li::before {
+            content: "\f3c5"; /* Font Awesome map-marker-alt icon */
+        }
+
+        /* --- Tourism --- */
         .tourism-item {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            margin-bottom: 40px;
+            /* border-bottom: 1px solid #eee; */ /* Removed border-bottom for card look */
+            /* padding-bottom: 30px; */ /* Removed padding-bottom */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack image and text */
+            gap: 20px; /* Space between image and text */
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            background-color: var(--light-card-bg); /* Add subtle background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+            overflow: hidden; /* Ensure image radius is contained */
         }
-        
+         .tourism-item:last-child { margin-bottom: 0; } /* Remove margin from last item */
+         .tourism-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+         }
+
+
         .tourism-item img {
             width: 100%;
-            max-height: 300px;
+            max-height: 350px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 8px;
         }
-        .dark-mode {
-        background-color: #1C1C1C;
-        color: #ffffff;
-        }
+        .tourism-text h3 { margin-top: 0; margin-bottom: 10px; }
+        .tourism-text p { margin-bottom: 0; color: #555; }
 
-        .dark-mode header,
-        .dark-mode footer {
-            background-color: #1c1c1c;
-        }
+         @media (min-width: 768px) { /* Side-by-side layout on larger screens */
+            .tourism-item {
+                flex-direction: row;
+                 align-items: flex-start; /* Align items at the top */
+            }
+             .tourism-item:nth-child(even) { /* Alternate layout */
+                 flex-direction: row-reverse;
+             }
 
-        .dark-mode nav {
-        background-color: #1c1c1c;
-        }
+            .tourism-item img {
+                width: 40%; /* Image takes up 40% width */
+                max-height: 250px;
+                flex-shrink: 0; /* Prevent image from shrinking */
+            }
+            .tourism-text {
+                 width: 60%; /* Text takes up 60% width */
+            }
+         }
 
-        .dark-mode nav a {
-            color: #ffffff;
-        }
-
-        .dark-mode nav a:hover {
-            background-color: #333333;
-        }
-
-        .dark-mode .tab-content {
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
-
-        .dark-mode button {
-            background-color: #333333;
-            color: #ffffff;
-        }
+        /* --- Reviews --- */
         .review {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--secondary-color);
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+         .review:last-child { margin-bottom: 0; }
+        .review p { margin: 5px 0; }
+        .review strong { color: var(--nav-bg); }
+        .review span.stars { /* Style for star rating */
+            color: var(--warning-color); /* Use warning color for stars */
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 5px;
         }
 
-        .review p {
-            margin: 5px 0;
-        }
-        .dark-mode .review {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        /* --- Forms (General) --- */
+        form { margin-top: 30px; }
+        .form-group { margin-bottom: 20px; } /* Group label and input */
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--nav-bg);
         }
 
-        .dark-mode .review p {
-            color: #cccccc;
-        }
-        .room-types {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        
-        .room-card {
-            width: 300px;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .room-card img {
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="tel"],
+        form textarea,
+        form select {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box; /* Include padding in width */
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            font-family: 'Poppins', sans-serif; /* Inherit font */
+             font-size: 0.95rem;
         }
-        
-        .amenities {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 30px;
+         form textarea {
+             min-height: 120px; /* Slightly shorter textarea */
+             resize: vertical; /* Allow vertical resize */
+         }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="tel"]:focus,
+        form textarea:focus,
+        form select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+            outline: none; /* Remove default outline */
         }
-        
-        .amenity {
-            width: 120px;
-            margin: 10px;
+
+        form button[type="submit"], .button-style, .submit-btn { /* Combined button styles */
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            text-decoration: none; /* For link styled as button */
+            display: inline-block; /* For link styled as button */
+        }
+         .submit-btn { /* Keep specific class for potential targeting */
+             /* Add any specific overrides here if needed */
+         }
+
+        form button[type="submit"]:hover, .button-style:hover, .submit-btn:hover {
+            background-color: #16a085; /* Darker shade */
+            transform: translateY(-2px) scale(1.02); /* Subtle lift and scale */
+        }
+
+        /* --- Contacts --- */
+        .contact-info { margin: 25px 0; }
+        .contact-info p { margin-bottom: 12px; display: flex; align-items: center; }
+        .contact-info i { /* Add icons to contact info */
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px; /* Ensure alignment */
             text-align: center;
+             font-size: 1.1rem;
+             flex-shrink: 0;
         }
-        
-        .amenity i {
-            font-size: 2.5rem;
-            color: #1abc9c;
-            margin-bottom: 10px;
-        }
-        
-        .dark-mode .room-card {
-            background-color: #1e1e1e;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
-        
-        .dark-mode .amenity i {
-            color: #2ecc71;
-        }
-        .promotions {
-        background-color: #f9f9f9;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .promotions h3 {
-        margin-bottom: 10px;
-    }
-    .promotions ul {
-        list-style: none;
-        padding: 0;
-    }
-    .promotions ul li {
-        margin-bottom: 10px;
-    }
-    .dark-mode .promotions {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
+         .contact-info a {
+             color: var(--primary-color);
+             text-decoration: none;
+             transition: color var(--transition-speed) ease;
+         }
+         .contact-info a:hover {
+             color: #16a085;
+             text-decoration: underline;
+         }
 
-    .dark-mode .promotions h3 {
-        color: #ffffff;
-    }
-
-    .dark-mode .promotions ul li {
-        color: #cccccc;
-    }
-        /* Carousel Styles */
+        /* --- Habitaciones --- */
         .carousel-container {
             position: relative;
-            max-width: 800px;
+            max-width: 900px; /* Wider carousel */
             margin: 0 auto 40px;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
-        
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .carousel-slide {
-            min-width: 100%;
-            position: relative;
-        }
-        
+
+        .carousel { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-slide { min-width: 100%; position: relative; }
+
         .carousel-slide img {
             width: 100%;
-            height: 400px;
+            height: 450px; /* Taller images */
             object-fit: cover;
+            display: block; /* Remove extra space below image */
         }
-        
+
         .carousel-caption {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(0,0,0,0.7);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)); /* Gradient background */
             color: white;
-            padding: 10px;
+            padding: 30px 20px 15px 20px; /* More padding */
             text-align: center;
+            font-size: 1.1rem;
         }
-        
+
         .carousel-prev, .carousel-next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.4);
             color: white;
             border: none;
             cursor: pointer;
-            padding: 15px;
-            font-size: 18px;
+            padding: 12px 18px; /* Adjust padding */
+            font-size: 22px; /* Larger arrows */
             border-radius: 50%;
-            transition: background-color 0.3s;
+            transition: background-color var(--transition-speed) ease;
+            z-index: 10;
         }
-        
-        .carousel-prev {
-            left: 10px;
-        }
-        
-        .carousel-next {
-            right: 10px;
-        }
-        
-        .carousel-prev:hover, .carousel-next:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-        
+        .carousel-prev { left: 15px; }
+        .carousel-next { right: 15px; }
+        .carousel-prev:hover, .carousel-next:hover { background-color: rgba(0,0,0,0.7); }
+
         .carousel-indicators {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px; /* Adjust position */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-        }
-        
-        .carousel-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.5);
-            cursor: pointer;
-        }
-        
-        .carousel-indicator.active {
-            background-color: white;
-        }
-        
-        .dark-mode .carousel-caption {
-            background-color: rgba(0,0,0,0.8);
-        }
-        
-        .dark-mode .carousel-prev, .dark-mode .carousel-next {
-            background-color: rgba(0,0,0,0.7);
-        }
-        .garage-section {
-            background-color: #f9f9f9;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-        }
-        
-        .garage-icon {
-            font-size: 3rem;
-            color: #1abc9c;
-            margin-right: 20px;
-        }
-        
-        .garage-content h3 {
-            margin-top: 0;
-        }
-        
-        .dark-mode .garage-section {
-            background-color: #1e1e1e;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-        
-        .dark-mode .garage-icon {
-            color: #2ecc71;
+            z-index: 10;
         }
 
-        .logo {
-            max-width: 100px;
-            margin-right: 20px;
+        .carousel-indicator {
+            width: 10px; /* Smaller dots */
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
         }
-        
-        .header-content {
+        .carousel-indicator.active {
+            background-color: white;
+            transform: scale(1.2); /* Slightly larger active dot */
+         }
+
+        .room-types {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center; /* Center cards */
+            gap: 25px; /* Space between cards */
+            margin: 40px 0;
+        }
+
+        .room-card {
+            width: 100%; /* Full width on small screens */
+            max-width: 340px; /* Max width per card */
+            margin: 0; /* Remove margin as gap handles spacing */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            background-color: var(--light-card-bg);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
+            display: flex; /* Use flex for vertical alignment */
+            flex-direction: column;
+        }
+
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .room-card img {
+            width: 100%;
+            height: 200px; /* Increased height */
+            object-fit: cover;
+            border-radius: 6px; /* Slightly rounded corners */
+            margin-bottom: 15px;
+        }
+        .room-card h3 { margin-top: 0; margin-bottom: 10px; color: var(--header-footer-bg); }
+        .room-card p { color: #555; margin-bottom: 10px; flex-grow: 1; /* Allow paragraph to grow */ }
+        .room-card p strong { color: var(--primary-color); font-size: 1.1rem; }
+
+        /* Amenities Section */
+        .amenities-section h3 { text-align: center; margin-bottom: 30px; }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px; /* Space between amenities */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .amenity {
+            width: 130px; /* Fixed width for alignment */
+            transition: transform var(--transition-speed) ease;
+        }
+        .amenity:hover {
+            transform: translateY(-5px);
+        }
+
+        .amenity i {
+            font-size: 3rem; /* Larger icons */
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: block; /* Ensure block display for centering */
+            transition: color var(--transition-speed) ease;
+        }
+        .amenity h4 { margin: 0 0 5px 0; font-size: 1rem; color: var(--nav-bg); }
+        .amenity p { font-size: 0.9rem; color: #666; margin: 0; }
+
+        .booking-cta { /* Call to action section */
+             text-align: center;
+             margin-top: 40px;
+             padding: 25px;
+             background-color: #eaf6f6;
+             border-radius: 8px;
+        }
+        .booking-cta p { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: var(--header-footer-bg); }
+
+        /* --- Reclamos Tab Specific Styles --- */
+        .tips-section {
+            margin-top: 40px; /* More space before tips */
+            padding: 20px;
+            background-color: #eaf6f6; /* Light cyan background */
+            border-left: 5px solid var(--primary-color);
+            border-radius: 8px;
+        }
+        .tips-section h3 { margin-top: 0; color: var(--header-footer-bg); }
+        .tips-section ul li::before { content: "\f0eb"; color: var(--primary-color); } /* Bulb icon */
+
+        .examples-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--nav-bg);
+            border-radius: 8px;
+        }
+         .examples-section h3 { margin-top: 0; color: var(--header-footer-bg); }
+         .examples-section h4 { margin-top: 20px; margin-bottom: 10px; color: var(--nav-bg); font-weight: 600;}
+         .examples-section h4:first-of-type { margin-top: 0; }
+         .examples-section ul { padding-left: 5px; } /* Less indent needed */
+         .examples-section ul li { margin-bottom: 12px; padding-left: 20px; }
+         .examples-section ul li::before {
+             font-family: "Font Awesome 6 Free";
+             font-weight: 900;
+             position: absolute;
+             left: 0;
+             top: 2px;
+             font-size: 0.9em;
+         }
+        /* Different icons for examples */
+         .examples-section .complaint-examples li::before { content: "\f071"; color: var(--danger-color); } /* Warning icon */
+         .examples-section .suggestion-examples li::before { content: "\f08d"; color: var(--warning-color); } /* Thumb tack icon */
+
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--header-footer-bg);
+            color: rgba(255, 255, 255, 0.8); /* Slightly muted text */
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        /* --- Utility Classes --- */
+        .text-center { text-align: center; }
+
+        /* --- Buttons (General) --- */
+        #darkModeToggle {
+            position: fixed;
+            top: 15px; /* Adjusted position */
+            right: 15px;
+            padding: 8px 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001; /* Above sticky nav */
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        #darkModeToggle:hover {
+             background-color: #16a085;
+             transform: scale(1.05);
+        }
+
+        #backToTop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+            opacity: 0; /* Start hidden for fade */
+            transform: scale(0.8); /* Start small for fade */
+        }
+         #backToTop.visible { /* Class added by JS */
+            display: block;
+            opacity: 0.8;
+            transform: scale(1);
+         }
+
+        #backToTop:hover {
+            background-color: #16a085;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 50px; /* Slightly smaller */
+            height: 50px;
+            bottom: 80px; /* Position above back-to-top */
+            right: 18px; /* Align with back-to-top */
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 26px; /* Adjust icon size */
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            z-index: 1001;
+            display: flex;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
+            transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
         }
-        
-        .header-text {
-            text-align: left;
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E; /* Darker green on hover */
         }
+
+
+        /* --- Dark Mode Styles --- */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .dark-mode header,
+        .dark-mode footer { background-color: #1a2530; /* Slightly different dark shade */ }
+        .dark-mode nav {
+             background-color: #212f3c;
+             scrollbar-color: var(--secondary-color) #212f3c; /* Firefox */
+         }
+        .dark-mode nav::-webkit-scrollbar-track { background: #212f3c; }
+        .dark-mode nav::-webkit-scrollbar-thumb { background-color: var(--secondary-color); }
+
+        .dark-mode nav a { color: #e0e0e0; }
+        .dark-mode nav a:hover { background-color: var(--primary-color); color: white; }
+        .dark-mode nav a.active { background-color: var(--primary-color); color: white; }
+
+        .dark-mode .tab-content {
+            background-color: var(--dark-card-bg);
+            color: var(--dark-text);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Darker shadow */
+        }
+        .dark-mode .tab-content h2 { color: var(--primary-color); border-bottom-color: var(--secondary-color); }
+        .dark-mode .tab-content h3 { color: #e0e0e0; }
+
+        .dark-mode .gallery img { box-shadow: 0 2px 8px rgba(255,255,255,0.1); }
+        .dark-mode .gallery img:hover { box-shadow: 0 6px 15px rgba(255,255,255,0.15); }
+
+        .dark-mode ul li { color: #cccccc; }
+        .dark-mode ul li::before { color: var(--secondary-color); } /* Use secondary color for icons */
+
+        .dark-mode .garage-section { background-color: #2a3b4c; border-left-color: var(--secondary-color); }
+        .dark-mode .garage-icon { color: var(--secondary-color); }
+        .dark-mode .garage-content h3 { color: #f0f0f0; }
+        .dark-mode .garage-content p { color: #cccccc; }
+
+        .dark-mode .promotions { background-color: var(--secondary-color); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .dark-mode .promotions h3 { color: white; border-bottom-color: rgba(255,255,255,0.3); }
+        .dark-mode .promotions ul li { color: white; }
+        .dark-mode .promotions ul li::before { color: white; }
+
+        .dark-mode .location-info strong { color: #e0e0e0; }
+        .dark-mode .map-container { box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+        .dark-mode .tourism-item {
+            background-color: var(--dark-card-bg);
+            /* border-bottom-color: #333; */ /* Border removed */
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+         }
+         .dark-mode .tourism-item:hover { box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+         .dark-mode .tourism-text p { color: #cccccc; }
+
+
+        .dark-mode .review {
+            background-color: var(--dark-card-bg);
+            color: var(--dark-text);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+            border-left-color: var(--primary-color);
+        }
+        .dark-mode .review strong { color: #e0e0e0; }
+        .dark-mode .review p { color: #cccccc; }
+
+        .dark-mode form label { color: #e0e0e0; }
+        .dark-mode form input[type="text"],
+        .dark-mode form input[type="email"],
+        .dark-mode form input[type="tel"],
+        .dark-mode form textarea,
+        .dark-mode form select {
+            background-color: #2c3e50;
+            border-color: #555;
+            color: var(--dark-text);
+        }
+        .dark-mode form input::placeholder,
+        .dark-mode form textarea::placeholder { color: #aaa; }
+
+        .dark-mode form input:focus,
+        .dark-mode form textarea:focus,
+        .dark-mode form select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(46, 204, 113, 0.4);
+        }
+
+        .dark-mode form button[type="submit"], .dark-mode .button-style, .dark-mode .submit-btn {
+             background-color: var(--secondary-color);
+             color: var(--dark-bg); /* Dark text on light green button */
+        }
+        .dark-mode form button[type="submit"]:hover, .dark-mode .button-style:hover, .dark-mode .submit-btn:hover {
+             background-color: #27ae60; /* Darker green */
+        }
+
+        .dark-mode .contact-info p { color: #cccccc; }
+        .dark-mode .contact-info i { color: var(--secondary-color); }
+        .dark-mode .contact-info a { color: var(--secondary-color); }
+        .dark-mode .contact-info a:hover { color: #27ae60; }
+
+
+        .dark-mode .carousel-caption { background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); }
+        .dark-mode .carousel-prev, .dark-mode .carousel-next { background-color: rgba(255,255,255,0.2); }
+        .dark-mode .carousel-prev:hover, .dark-mode .carousel-next:hover { background-color: rgba(255,255,255,0.4); }
+        .dark-mode .carousel-indicator { background-color: rgba(255,255,255,0.3); }
+        .dark-mode .carousel-indicator.active { background-color: #e0e0e0; }
+
+
+        .dark-mode .room-card {
+            background-color: var(--dark-card-bg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+        .dark-mode .room-card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+        .dark-mode .room-card h3 { color: #f0f0f0; }
+        .dark-mode .room-card p { color: #cccccc; }
+        .dark-mode .room-card p strong { color: var(--secondary-color); }
+
+
+        .dark-mode .amenity i { color: var(--secondary-color); }
+        .dark-mode .amenity h4 { color: #e0e0e0; }
+        .dark-mode .amenity p { color: #b0b0b0; }
+
+        .dark-mode .booking-cta { background-color: #2a3b4c; }
+        .dark-mode .booking-cta p { color: #f0f0f0; }
+
+         /* Dark Mode Reclamos Tab */
+        .dark-mode .tips-section {
+            background-color: #2a3b4c; /* Darker blue/gray */
+            border-left-color: var(--secondary-color);
+        }
+         .dark-mode .tips-section h3 { color: #f0f0f0; }
+         .dark-mode .tips-section ul li::before { color: var(--secondary-color); }
+
+         .dark-mode .examples-section {
+            background-color: #212f3c; /* Even darker */
+            border-left-color: #777; /* Darker gray border */
+         }
+         .dark-mode .examples-section h3 { color: #f0f0f0; }
+         .dark-mode .examples-section h4 { color: #e0e0e0; }
+         .dark-mode .examples-section ul li { color: #cccccc; }
+         /* Icons in dark mode examples keep their colors */
+
+
+        .dark-mode #darkModeToggle {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+         .dark-mode #darkModeToggle:hover { background-color: #27ae60; }
+
+        .dark-mode #backToTop {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+        .dark-mode #backToTop:hover { background-color: #27ae60; }
+
+        /* --- Animation Classes --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--animation-speed) ease-out, transform var(--animation-speed) ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="header-content">
-            <img src="logo.png" alt="Logo Residencial Arcángel Miguel" class="logo">
-            <div class="header-text">
+            <img src="logo.png" alt="Logo Residencial Arcángel Miguel" class="logo animate-on-scroll">
+            <div class="header-text animate-on-scroll">
                 <h1>Residencial Arcángel Miguel</h1>
-                <p>Su hogar en el corazón de Bolivia</p>
+                <p>Su hogar en la Capital del Folklore Boliviano</p>
             </div>
         </div>
-        <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px; padding: 10px; background-color: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer;">Modo Oscuro</button>
+        <button id="darkModeToggle">Modo Oscuro</button>
     </header>
-    
+
     <nav>
         <a href="#" class="tab-link active" onclick="openTab(event, 'inicio')">Inicio</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'habitaciones')">Habitaciones</a>
@@ -394,385 +948,665 @@
         <a href="#" class="tab-link" onclick="openTab(event, 'turismo')">Turismo</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'contactos')">Contactos</a>
         <a href="#" class="tab-link" onclick="openTab(event, 'reseñas')">Reseñas</a>
-        <a href="reclamos-sugerencias.html" class="tab-link">Reclamos y Sugerencias</a>
-        <a href="nueva.html" class="tab-link">Nueva</a>
-        
+        <a href="#" class="tab-link" onclick="openTab(event, 'reclamos')">Reclamos</a>
     </nav>
-    <a href="#top" id="backToTop" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #1abc9c; color: white; padding: 10px 15px; border-radius: 50%; text-align: center; font-size: 20px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">↑</a>
+
+    <!-- Back to top button -->
+    <a href="#" id="backToTop" title="Volver Arriba"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/59172207330" target="_blank" class="whatsapp-float" title="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
     <div id="inicio" class="tab-content active">
-        <h2>Bienvenido a Residencial Arcángel Miguel</h2>
-        <p>El mejor lugar para hospedarse en la ciudad de Oruro, conocida por su famoso carnaval y rica cultura.</p>
-        
-        <div class="gallery">
-            <img src="familiar.jpeg" alt="Habitación Premium">
-            <img src="comedor.jpg" alt="Área Común">
-            <img src="fachada.jpg" alt="Vista Exterior">
-        </div>
-        
-        <h3>Nuestros Servicios</h3>
-        <ul>
-            <li>Habitaciones confortables</li>
-            <li>Wifi gratuito</li>
-            <li>Estacionamiento privado</li>
-            <li>Recepción 24/7</li>
-        </ul>
-        
+        <section class="welcome-section animate-on-scroll">
+            <h2><i class="fas fa-door-open"></i> Bienvenido a Residencial Arcángel Miguel</h2>
+            <p>Descubra la comodidad y hospitalidad en Oruro, una ciudad vibrante conocida por su famoso carnaval y rica herencia cultural. Le ofrecemos una estancia placentera en el corazón de Bolivia.</p>
+        </section>
+
+        <section class="gallery-section animate-on-scroll" data-delay="100">
+             <h3><i class="fas fa-images"></i> Nuestras Instalaciones</h3>
+             <div class="gallery">
+                 <img src="familiar.jpeg" alt="Habitación Acogedora">
+                 <img src="comedor.jpg" alt="Área Común Confortable">
+                 <img src="fachada.jpg" alt="Fachada del Residencial">
+                 <img src="simple.jpeg" alt="Habitación Individual">
+                 <img src="doble.jpeg" alt="Habitación Doble">
+            </div>
+        </section>
+
+        <section class="services-section animate-on-scroll" data-delay="200">
+            <h3><i class="fas fa-concierge-bell"></i> Nuestros Servicios Destacados</h3>
+            <ul>
+                <li>Habitaciones confortables y limpias</li>
+                <li>Conexión Wifi gratuita</li>
+                <li>Estacionamiento privado y seguro</li>
+                <li>Atención en recepción las 24 horas</li>
+                <li>Ambiente familiar y acogedor</li>
+                <li>Duchas con agua caliente permanente</li>
+            </ul>
+        </section>
+
         <!-- Garage Section -->
-        <div class="garage-section">
+        <section class="garage-section animate-on-scroll" data-delay="300">
             <div class="garage-icon">
-                <i class="fas fa-car"></i>
+                <i class="fas fa-warehouse"></i> <!-- Changed icon -->
             </div>
             <div class="garage-content">
-                <h3>Garaje para Huéspedes</h3>
-                <p>Ofrecemos estacionamiento seguro para su vehículo durante toda su estadía. Nuestro garaje cuenta con vigilancia las 24 horas para su tranquilidad.</p>
+                <h3>Garaje Privado para Huéspedes</h3>
+                <p>Ofrecemos estacionamiento seguro y cubierto para su vehículo durante toda su estadía. Nuestro garaje cuenta con vigilancia para su total tranquilidad.</p>
             </div>
-        </div>
-        
-        <div class="promotions">
-            <h3>Promociones Especiales</h3>
+        </section>
+         <!-- Promotions Section (Example - can be added if needed) -->
+        <!--
+        <section class="promotions animate-on-scroll" data-delay="400">
+             <h3><i class="fas fa-tags"></i> Promociones Especiales</h3>
             <ul>
-                <li>- Descuento del 20% en estadías de más de 3 noches</li>
-                <li>- Desayuno gratuito para reservas realizadas este mes</li>
-                <li>- Paquete especial para parejas</li>
+                <li>¡Ahorre! Descuento del 15% en estadías superiores a 3 noches.</li>
+                <li>Reserve este mes y disfrute de un desayuno continental de cortesía.</li>
+                <li>Paquete Romántico: Sorprenda a su pareja (consulte detalles).</li>
+                <li>Tarifas especiales para grupos y delegaciones.</li>
             </ul>
-        </div>
+        </section>
+         -->
     </div>
-    
+
     <div id="ubicacion" class="tab-content">
-        <h2>Ubicación</h2>
-        <p>Estamos ubicados estratégicamente en el centro de la ciudad de Oruro, a pocos minutos de los principales atractivos turísticos.</p>
-        
-        <p><strong>Dirección:</strong> BACOVICK 432 AROMA Y VILLARROEL, (FRENTE TERMINAL DE BUSES SALIDA OESTE), Ciudad Oruro, Bolivia</p>
-        
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60455.89429780723!2d-67.15677833644659!3d-17.970737765860936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b0ed3cc15a8f%3A0x99ca3954655c604f!2sOruro!5e0!3m2!1ses!2sbo!4v1621879821842!5m2!1ses!2sbo" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        
-        <h3>Cómo llegar</h3>
-        <ul>
-            <li><strong>Desde el aeropuerto:</strong> 15 minutos en taxi (aproximadamente)</li>
-            <li><strong>Desde la terminal de buses:</strong> 10 minutos caminando</li>
-            <li><strong>Desde la Plaza Principal:</strong> 5 minutos caminando</li>
-        </ul>
+         <section class="location-info animate-on-scroll">
+            <h2><i class="fas fa-map-marker-alt"></i> Nuestra Ubicación Estratégica</h2>
+            <p>Nos encontramos en una ubicación privilegiada en el centro de Oruro, facilitando su acceso a los principales puntos de interés, comercios y la terminal de autobuses.</p>
+            <p><strong><i class="fas fa-map-pin"></i> Dirección:</strong> BACOVICK #432, entre AROMA y VILLARROEL (Frente a la Antigua Terminal de Buses, Salida Oeste), Oruro, Bolivia</p>
+        </section>
+
+        <section class="map-section animate-on-scroll" data-delay="100">
+            <h3><i class="fas fa-map-marked-alt"></i> Mapa Interactivo</h3>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d266.2602397994433!2d-67.10485322814064!3d-17.9613077001903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e2b0af72625997%3A0xb429b26ffafb0601!2sResidencial%20Arcangel%20Miguel!5e0!3m2!1ses-419!2sbo!4v1747093947133!5m2!1ses-419!2sbo" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <section class="directions animate-on-scroll" data-delay="200">
+            <h3><i class="fas fa-route"></i> Cómo Llegar Fácilmente</h3>
+            <ul>
+                <li><strong>Desde la Nueva Terminal de Buses:</strong> Aprox. 15-20 minutos en taxi o minibús.</li>
+                <li><strong>Desde la Antigua Terminal de Buses:</strong> ¡Estamos justo en frente! Solo cruce la calle (Salida Oeste).</li>
+                <li><strong>Desde la Plaza 10 de Febrero (Principal):</strong> Agradable caminata de 10-15 minutos.</li>
+                <li><strong>En vehículo particular:</strong> Acceso directo por la calle Bacovick.</li>
+            </ul>
+        </section>
     </div>
-    
+
     <div id="turismo" class="tab-content">
-        <h2>Turismo en Oruro</h2>
-        <p>Oruro es conocido mundialmente por su espectacular Carnaval, declarado Patrimonio Oral e Intangible de la Humanidad por la UNESCO. Además, ofrece diversos atractivos turísticos para explorar durante todo el año.</p>
-        
-        <div class="tourism-item">
-            <h3>Carnaval de Oruro</h3>
-            <img src="carnaval.jpg" alt="Carnaval de Oruro">
-            <p>Una celebración única que combina elementos católicos con tradiciones andinas. Las danzas folclóricas, los coloridos trajes y las máscaras hacen de este evento uno de los más importantes de Sudamérica.</p>
-        </div>
-        
-        <div class="tourism-item">
-            <h3>Santuario del Socavón</h3>
-            <img src="Santuario.jpg" alt="Santuario del Socavón">
-            <p>El Templo del Socavón es un importante centro religioso y cultural, dedicado a la Virgen de la Candelaria, patrona de los mineros.</p>
-        </div>
-        
-        <div class="tourism-item">
-            <h3>Museo Antropológico Eduardo López Rivas</h3>
-            <img src="museo.jpeg" alt="Museo Antropológico">
-            <p>Un importante museo que alberga colecciones arqueológicas y etnográficas que muestran la rica historia y cultura de la región.</p>
-        </div>
-        
-        <div class="tourism-item">
-            <h3>Lago Uru Uru</h3>
-            <img src="Lago.jpeg" alt="Lago Uru Uru">
-            <p>Ubicado a corta distancia de la ciudad, este hermoso lago es un importante ecosistema que alberga diversas especies de aves, incluyendo los famosos flamencos andinos. Un paraíso para los amantes de la naturaleza y la fotografía.</p>
-        </div>
-        
-        <div class="tourism-item">
-            <h3>Faro de Conchupata</h3>
-            <img src="Faro.jpg" alt="Faro de Conchupata">
-            <p>Un emblemático mirador que ofrece vistas panorámicas espectaculares de toda la ciudad de Oruro y sus alrededores. Es especialmente recomendable visitarlo al atardecer para disfrutar de un paisaje inolvidable.</p>
-        </div>
-        
-        <div class="tourism-item">
-            <h3>Monumento a la Virgen del Socavon</h3>
-            <img src="Monumento.jpg" alt="Mina San José">
-            <p>El Monumento a la Virgen del Socavón es una impresionante escultura ubicada en el cerro Santa Bárbara de Oruro, Bolivia. Con una altura de 45,4 metros, es una de las imágenes marianas más grandes del mundo y un símbolo de fe y devoción para los habitantes de la región.</p>
-        </div>
+        <section class="animate-on-scroll">
+             <h2><i class="fas fa-binoculars"></i> Descubre los Tesoros de Oruro</h2>
+             <p>Oruro es mucho más que su mundialmente famoso Carnaval. Explore la riqueza cultural, histórica y natural que esta fascinante ciudad tiene para ofrecer durante todo el año.</p>
+        </section>
+
+        <section class="tourism-items-container">
+            <article class="tourism-item animate-on-scroll" data-delay="100">
+                 <img src="carnaval.jpg" alt="Majestuoso Carnaval de Oruro">
+                 <div class="tourism-text">
+                     <h3>Carnaval de Oruro (UNESCO)</h3>
+                     <p>Una explosión de fe, color y tradición. Viva la experiencia de una de las obras maestras del Patrimonio Oral e Intangible de la Humanidad, con sus danzas folclóricas únicas y máscaras impresionantes.</p>
+                 </div>
+            </article>
+
+            <article class="tourism-item animate-on-scroll" data-delay="200">
+                 <img src="Santuario.jpg" alt="Interior del Santuario del Socavón">
+                  <div class="tourism-text">
+                     <h3>Santuario de la Virgen del Socavón</h3>
+                     <p>Centro de peregrinación y corazón del Carnaval. Visite este importante templo dedicado a la patrona de los mineros y admire su arte sacro y el museo minero subterráneo.</p>
+                 </div>
+            </article>
+
+             <article class="tourism-item animate-on-scroll" data-delay="300">
+                 <img src="Monumento.jpg" alt="Imponente Monumento a la Virgen del Socavón">
+                  <div class="tourism-text">
+                     <h3>Monumento a la Virgen del Socavón</h3>
+                     <p>Contemple la ciudad desde las alturas junto a esta gigantesca escultura, una de las imágenes marianas más grandes del mundo. Ofrece vistas panorámicas incomparables.</p>
+                 </div>
+            </article>
+
+             <article class="tourism-item animate-on-scroll" data-delay="400">
+                 <img src="Faro.jpg" alt="Vista desde el Faro de Conchupata">
+                  <div class="tourism-text">
+                     <h3>Faro de Conchupata</h3>
+                     <p>Un hito histórico y mirador emblemático. Disfrute de vistas espectaculares de Oruro, especialmente al atardecer. Aquí se izó por primera vez la bandera boliviana.</p>
+                 </div>
+            </article>
+
+            <article class="tourism-item animate-on-scroll" data-delay="500">
+                 <img src="Lago.jpeg" alt="Flamencos en el Lago Uru Uru">
+                 <div class="tourism-text">
+                     <h3>Lago Uru Uru y Lago Poopó</h3>
+                     <p>Escápese a la naturaleza y observe la avifauna andina, incluyendo los elegantes flamencos. Estos humedales cercanos son vitales ecosistemas y perfectos para la fotografía.</p>
+                 </div>
+            </article>
+
+            <article class="tourism-item animate-on-scroll" data-delay="600">
+                 <img src="museo.jpeg" alt="Exhibición en el Museo Antropológico">
+                  <div class="tourism-text">
+                     <h3>Museo Antropológico Eduardo López Rivas</h3>
+                     <p>Sumérjase en la historia precolombina y etnográfica de la región. Alberga valiosas colecciones arqueológicas, incluyendo artefactos de la cultura Wankarani y señoríos aymaras.</p>
+                 </div>
+            </article>
+        </section>
     </div>
 
     <div id="reseñas" class="tab-content">
-        <h2>Reseñas de Nuestros Clientes</h2>
-        <p>Esto es lo que nuestros huéspedes dicen sobre su experiencia en Residencial Arcángel Miguel:</p>
-        
-        <div class="review">
-            <p><strong>Juan Pérez:</strong> "Excelente lugar para hospedarse. Las habitaciones son cómodas y el personal es muy amable. ¡Definitivamente volveré!"</p>
-            <p>⭐⭐⭐⭐⭐</p>
-        </div>
-        
-        <div class="review">
-            <p><strong>María López:</strong> "La ubicación es perfecta, cerca de todo. Además, el desayuno fue delicioso. Muy recomendado."</p>
-            <p>⭐⭐⭐⭐⭐</p>
-        </div>
-        
-        <div class="review">
-            <p><strong>Carlos García:</strong> "El servicio al cliente es excepcional. Me ayudaron con todo lo que necesitaba durante mi estadía."</p>
-            <p>⭐⭐⭐⭐⭐</p>
-        </div>
-        
-        <h3>Deja tu Reseña</h3>
-        <form>
-            <div style="margin-bottom: 15px;">
-                <label for="nombreReseña">Nombre:</label><br>
-                <input type="text" id="nombreReseña" name="nombreReseña" style="width: 100%; padding: 8px; box-sizing: border-box;">
+        <section class="animate-on-scroll">
+             <h2><i class="fas fa-star"></i> Opiniones de Nuestros Huéspedes</h2>
+             <p>Valoramos la opinión de quienes nos eligen. Vea lo que dicen sobre su experiencia en Residencial Arcángel Miguel:</p>
+        </section>
+
+        <section class="reviews-list">
+            <div class="review animate-on-scroll" data-delay="100">
+                <p><strong>Carlos Nina:</strong> "Centrico, economico, buena atencion."</p>
+                <span class="stars">⭐⭐⭐⭐</span>
             </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label for="comentario">Comentario:</label><br>
-                <textarea id="comentario" name="comentario" rows="5" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+
+            <div class="review animate-on-scroll" data-delay="200">
+                <p><strong>Jannette Loza:</strong> "Lugar tranquilo, económico."</p>
+                <span class="stars">⭐⭐⭐⭐⭐</span>
             </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label for="calificacion">Calificación:</label><br>
-                <select id="calificacion" name="calificacion" style="width: 100%; padding: 8px; box-sizing: border-box;">
-                    <option value="5">⭐⭐⭐⭐⭐</option>
-                    <option value="4">⭐⭐⭐⭐</option>
-                    <option value="3">⭐⭐⭐</option>
-                    <option value="2">⭐⭐</option>
-                    <option value="1">⭐</option>
-                </select>
+
+            <div class="review animate-on-scroll" data-delay="300">
+                <p><strong>Manuel Torres:</strong> "Muy buena, bien ubicada y buen servicio."</p>
+                 <span class="stars">⭐⭐⭐⭐⭐</span>
             </div>
-            
-            <button type="submit" style="background-color: #1abc9c; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Enviar Reseña</button>
-        </form>
+             <!-- Add more real or placeholder reviews -->
+             <div class="review animate-on-scroll" data-delay="400">
+                <p><strong>Sergio Javier Mamani Arias:</strong> "Muy buen lugar para hospedarse en la cuidad de Oruro. Se los recomiendo a todos."</p>
+                <span class="stars">⭐⭐⭐⭐</span>
+            </div>
+        </section>
+
+        <section class="review-form-section animate-on-scroll" data-delay="500">
+            <h3><i class="fas fa-edit"></i> ¡Déjanos tu reseña en Google!</h3>
+            <p>Tu opinión nos ayuda a mejorar y a que otros viajeros nos encuentren. Haz clic en el enlace para calificarnos:</p>
+            <a href="https://maps.app.goo.gl/1JKczHNWgqGmUEdx8" target="_blank" class="button-style" style="margin-top: 10px;">
+                <i class="fab fa-google"></i> Calificar en Google Maps
+            </a>
+        </section>
     </div>
-    
+
     <div id="contactos" class="tab-content">
-        <h2>Contactos</h2>
-        <p>Para reservas o consultas, Contactanos a través de cualquiera de los siguientes medios:</p>
-        
-        <div class="contact-info">
-            <p><strong>Teléfono:</strong> +591 252-76183</p>
-            <p><strong>WhatsApp:</strong> +591 72207330</p>
-            <a href="https://wa.me/59172207330" style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; padding: 10px 15px; border-radius: 50%; text-align: center; font-size: 20px; text-decoration: none;">📞</a>
-            <p><strong>Email:</strong> residencialarcangelmiguel@hotmail.com</p>
-            <p><strong>Facebook:</strong> Residencial Arcángel Miguel</p>
-        </div>
-        
-        <h3>Formulario de Contacto</h3>
-        <form>
-            <div style="margin-bottom: 15px;">
-                <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" style="width: 100%; padding: 8px; box-sizing: border-box;">
+         <section class="contact-details animate-on-scroll">
+             <h2><i class="fas fa-phone-alt"></i> Contáctanos</h2>
+             <p>Estamos a tu disposición para reservas, consultas o cualquier información que necesites. ¡No dudes en comunicarte!</p>
+
+             <div class="contact-info">
+                 <p><i class="fas fa-phone"></i><strong>Teléfono Fijo:</strong> <a href="tel:+59125276183">252-76183</a></p>
+                 <p><i class="fab fa-whatsapp"></i><strong>WhatsApp:</strong> <a href="https://wa.me/59172207330" target="_blank">+591 72207330</a></p>
+                 <p><i class="fas fa-envelope"></i><strong>Email:</strong> <a href="mailto:residencialarcangelmiguel@hotmail.com">residencialarcangelmiguel@hotmail.com</a></p>
+                 <p><i class="fab fa-facebook-square"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/RESIDENCIALARCANGELMIGUEL" target="_blank">Residencial Arcángel Miguel</a></p>
+                 <p><i class="fas fa-map-marker-alt"></i><strong>Dirección:</strong> Bacovick #432 e/ Aroma y Villarroel, Oruro, Bolivia (Frente Antigua Terminal)</p>
             </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" style="width: 100%; padding: 8px; box-sizing: border-box;">
-            </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label for="mensaje">Mensaje:</label><br>
-                <textarea id="mensaje" name="mensaje" rows="5" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
-            </div>
-            
-            <button type="submit" style="background-color: #1abc9c; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Enviar</button>
-        </form>
+        </section>
+
+        <section class="contact-form-section animate-on-scroll" data-delay="100">
+            <h3><i class="fas fa-paper-plane"></i> Envíanos un Mensaje Rápido</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="nombre_contacto">Nombre Completo:</label>
+                    <input type="text" id="nombre_contacto" name="nombre_contacto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_contacto">Correo Electrónico:</label>
+                    <input type="email" id="email_contacto" name="email_contacto" required>
+                </div>
+
+                 <div class="form-group">
+                    <label for="asunto_contacto">Asunto:</label> <!-- Added Subject Field -->
+                    <input type="text" id="asunto_contacto" name="asunto_contacto">
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje_contacto">Tu Mensaje:</label>
+                    <textarea id="mensaje_contacto" name="mensaje_contacto" rows="6" required></textarea>
+                </div>
+
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+        </section>
     </div>
-    
+
     <div id="habitaciones" class="tab-content">
-        <h2>Nuestras Habitaciones</h2>
-        <p>Ofrecemos diferentes tipos de habitaciones para satisfacer sus necesidades de hospedaje, todas equipadas con comodidades modernas y un ambiente acogedor.</p>
-        
+        <section class="animate-on-scroll">
+             <h2><i class="fas fa-bed"></i> Nuestras Habitaciones</h2>
+             <p>Elija la habitación que mejor se adapte a sus necesidades. Ofrecemos espacios limpios, confortables y equipados para asegurar una estancia placentera.</p>
+        </section>
+
         <!-- Carousel Start -->
-        <div class="carousel-container">
+        <section class="carousel-container animate-on-scroll" data-delay="100">
             <div class="carousel">
                 <div class="carousel-slide">
-                    <img src="simple.jpeg" alt="Habitación Simple">
-                    <div class="carousel-caption">Habitación Simple - Confort y Comodidad</div>
+                    <img src="simple.jpeg" alt="Habitación Simple Cómoda">
+                    <div class="carousel-caption">Habitación Simple: Confort y Privacidad</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="doble.jpeg" alt="Habitación Doble">
-                    <div class="carousel-caption">Habitación Doble - Espacio para Compartir</div>
+                    <img src="doble.jpeg" alt="Habitación Doble Espaciosa">
+                    <div class="carousel-caption">Habitación Doble: Ideal para Compartir</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="familiar.jpeg" alt="Habitación Familiar">
-                    <div class="carousel-caption">Habitación Familiar - Elegancia y Confort</div>
+                    <img src="familiar.jpeg" alt="Habitación Matrimonial Acogedora">
+                    <div class="carousel-caption">Habitación Matrimonial: Calidez y Espacio</div>
+                </div>
+                 <div class="carousel-slide">
+                    <img src="familiar.jpeg" alt="Habitación Familiar Amplia">
+                    <div class="carousel-caption">Habitaciones Familiares: Comodidad para Todos</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="bano.jpg" alt="Baño privado">
-                    <div class="carousel-caption">Baños Privados y publicos - Duchas Calientes 24/7</div>
+                    <img src="bano.jpg" alt="Baño Privado Moderno">
+                    <div class="carousel-caption">Baños Privados y Compartidos: Limpieza Garantizada</div>
                 </div>
             </div>
-            
-            <button class="carousel-prev">❮</button>
-            <button class="carousel-next">❯</button>
-            
+
+            <button class="carousel-prev" aria-label="Anterior">❮</button>
+            <button class="carousel-next" aria-label="Siguiente">❯</button>
+
             <div class="carousel-indicators">
                 <div class="carousel-indicator active"></div>
                 <div class="carousel-indicator"></div>
                 <div class="carousel-indicator"></div>
+                 <div class="carousel-indicator"></div>
                 <div class="carousel-indicator"></div>
             </div>
-        </div>
+        </section>
         <!-- Carousel End -->
-        
-        <div class="room-types">
+
+        <section class="room-types animate-on-scroll" data-delay="200">
             <div class="room-card">
                 <img src="simple.jpeg" alt="Habitación Simple">
                 <h3>Habitación Simple</h3>
-                <p>Perfecta para el viajero individual, equipada con una cama individual cómoda y todas las comodidades necesarias.</p>
+                <p>Perfecta para el viajero individual. Equipada con una cama cómoda, TV y espacio funcional.</p>
                 <p><strong>Desde:</strong> 70 Bs/noche</p>
             </div>
-            
+
             <div class="room-card">
                 <img src="doble.jpeg" alt="Habitación Doble">
                 <h3>Habitación Doble</h3>
-                <p>Espaciosa habitación con dos camas individuales, ideal para amigos o compañeros de viaje.</p>
+                <p>Ideal para amigos o colegas. Cuenta con dos camas individuales, TV y comodidades esenciales.</p>
                 <p><strong>Desde:</strong> 140 Bs/noche</p>
             </div>
-            
+
             <div class="room-card">
-                <img src="familiar.jpeg" alt="Habitación Matrimonial">
+                 <img src="familiar.jpeg" alt="Habitación Matrimonial">
                 <h3>Habitación Matrimonial</h3>
-                <p>Confortable habitación con cama matrimonial, perfecta para parejas o quienes buscan más espacio.</p>
+                <p>Diseñada para parejas. Disfrute de una cama matrimonial confortable, TV y un ambiente acogedor.</p>
                 <p><strong>Desde:</strong> 140 Bs/noche</p>
             </div>
-            <div class="room-card">
-                <img src="bano.jpg" alt="Baño privado">
-                <h3>Baño privado</h3>
-                <p>Baños Privados y publicos - Duchas Calientes 24/7.</p>
-                <p><strong>Desde:</strong> 200 Bs/noche</p>
+
+             <div class="room-card">
+                 <img src="familiar.jpeg" alt="Habitación Familiar">
+                 <h3>Habitación Familiar / Triple</h3>
+                 <p>Espacio adicional para familias pequeñas o grupos. Consulte disponibilidad y configuración de camas.</p>
+                 <p><strong>Consultar Precio</strong></p>
             </div>
-        </div>
-        
-        <h3>Todas nuestras habitaciones incluyen:</h3>
-        
-        <div class="amenities">
-            <div class="amenity">
-                <i class="fas fa-tv"></i>
-                <h4>TV Cable</h4>
-                <p>Disfrute de diversos canales para su entretenimiento</p>
+
+             <div class="room-card">
+                 <img src="bano.jpg" alt="Opción con Baño privado">
+                 <h3>Opción Baño Privado</h3>
+                 <p>Disponemos de habitaciones con baño privado para mayor comodidad y privacidad. Incluyen ducha caliente 24/7.</p>
+                 <p><strong>Desde:</strong> 200 Bs/noche (aprox.)</p>
             </div>
-            
-            <div class="amenity">
-                <i class="fas fa-shower"></i>
-                <h4>Ducha Caliente</h4>
-                <p>Agua caliente disponible 24/7</p>
+        </section>
+
+        <section class="amenities-section animate-on-scroll" data-delay="300">
+             <h3><i class="fas fa-check-circle"></i> Comodidades Incluidas</h3>
+             <div class="amenities">
+                 <div class="amenity">
+                    <i class="fas fa-tv"></i>
+                    <h4>TV por Cable</h4>
+                    <p>Variedad de canales</p>
+                 </div>
+                 <div class="amenity">
+                    <i class="fas fa-wifi"></i>
+                    <h4>WiFi Gratuito</h4>
+                    <p>Conexión estable</p>
+                 </div>
+                 <div class="amenity">
+                    <i class="fas fa-shower"></i>
+                    <h4>Ducha Caliente</h4>
+                    <p>Disponible 24/7</p>
+                 </div>
+                  <div class="amenity">
+                     <i class="fas fa-soap"></i>
+                     <h4>Artículos de aseo</h4>
+                     <p>Básicos incluidos</p>
+                 </div>
+                 <div class="amenity">
+                    <i class="fas fa-video"></i>
+                    <h4>Seguridad</h4>
+                    <p>Vigilancia CCTV</p>
+                 </div>
+                  <div class="amenity">
+                     <i class="fas fa-broom"></i>
+                     <h4>Limpieza Diaria</h4>
+                     <p>Habitaciones impecables</p>
+                 </div>
             </div>
-            
-            <div class="amenity">
-                <i class="fas fa-wifi"></i>
-                <h4>Internet</h4>
-                <p>WiFi gratuito de alta velocidad</p>
-            </div>
-            
-            <div class="amenity">
-                <i class="fas fa-video"></i>
-                <h4>Seguridad</h4>
-                <p>Cámaras de seguridad en áreas comunes</p>
-            </div>
-        </div>
-        
-        <p style="text-align: center; margin-top: 30px;">
-            <strong>¿Listo para reservar?</strong> Contáctenos directamente para obtener nuestras mejores tarifas y disponibilidad.
-        </p>
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="#" onclick="openTab(event, 'contactos')" style="background-color: #1abc9c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Reservar Ahora</a>
-        </div>
+        </section>
+
+        <section class="booking-cta animate-on-scroll" data-delay="400">
+             <p><strong>¿Listo para reservar tu estancia en Oruro?</strong></p>
+             <a href="#" onclick="openTab(event, 'contactos'); document.getElementById('contactos').scrollIntoView({behavior: 'smooth'});" class="button-style">
+                 <i class="fas fa-calendar-check"></i> Consultar Disponibilidad y Reservar
+             </a>
+        </section>
     </div>
-    
+
+    <!-- NUEVA PESTAÑA: Reclamos y Sugerencias -->
+    <div id="reclamos" class="tab-content">
+        <section class="animate-on-scroll">
+            <h2><i class="fas fa-comments"></i> Reclamos y Sugerencias</h2>
+            <p>Su opinión es muy valiosa para nosotros. En Residencial Arcángel Miguel buscamos mejorar continuamente y sus comentarios nos ayudan a lograrlo. Por favor, utilice este formulario para hacernos llegar sus reclamos, sugerencias o felicitaciones.</p>
+        </section>
+
+        <section class="complaint-form-section animate-on-scroll" data-delay="100">
+            <h3><i class="fas fa-edit"></i> Formulario</h3>
+            <form id="reclamos-form">
+                <div class="form-group">
+                    <label for="nombre_reclamo">Nombre completo:</label>
+                    <input type="text" id="nombre_reclamo" name="nombre_reclamo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_reclamo">Correo electrónico:</label>
+                    <input type="email" id="email_reclamo" name="email_reclamo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono_reclamo">Teléfono (opcional):</label>
+                    <input type="tel" id="telefono_reclamo" name="telefono_reclamo" placeholder="Ej: 71234567">
+                </div>
+
+                <div class="form-group">
+                    <label for="habitacion_reclamo">Número de habitación (si aplica):</label>
+                    <input type="text" id="habitacion_reclamo" name="habitacion_reclamo" placeholder="Ej: 25">
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo_reclamo">Tipo de comentario:</label>
+                    <select id="tipo_reclamo" name="tipo_reclamo" required>
+                        <option value="">-- Seleccione --</option>
+                        <option value="reclamo">Reclamo</option>
+                        <option value="sugerencia">Sugerencia</option>
+                        <option value="felicitacion">Felicitación</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="departamento_reclamo">Área relacionada:</label>
+                    <select id="departamento_reclamo" name="departamento_reclamo" required>
+                        <option value="">-- Seleccione --</option>
+                        <option value="recepcion">Recepción / Atención</option>
+                        <option value="habitaciones">Habitación (Comodidad, equipamiento)</option>
+                        <option value="limpieza">Limpieza</option>
+                        <option value="mantenimiento">Mantenimiento (Ducha, TV, etc.)</option>
+                        <option value="seguridad">Seguridad / Garaje</option>
+                        <option value="wifi">Internet WiFi</option>
+                        <option value="otro">Otro / General</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje_reclamo">Su mensaje:</label>
+                    <textarea id="mensaje_reclamo" name="mensaje_reclamo" required placeholder="Por favor, sea lo más detallado posible..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar Formulario</button>
+            </form>
+        </section>
+
+        <section class="tips-section animate-on-scroll" data-delay="200">
+            <h3><i class="fas fa-lightbulb"></i> ¿Cómo podemos ayudarle mejor?</h3>
+            <p>Para poder atender su comentario de manera más eficiente, le recomendamos:</p>
+            <ul>
+                <li>Ser específico sobre el problema, sugerencia o felicitación.</li>
+                <li>Incluir fechas y horarios si es relevante para un reclamo.</li>
+                <li>Mencionar nombres del personal involucrado (si aplica y lo recuerda).</li>
+                <li>Proporcionar información de contacto precisa para que podamos darle seguimiento si es necesario.</li>
+            </ul>
+            <p>Nos comprometemos a revisar todos los comentarios y tomar las acciones correspondientes.</p>
+        </section>
+
+        <section class="examples-section animate-on-scroll" data-delay="300">
+             <h3><i class="fas fa-clipboard-list"></i> Ejemplos</h3>
+
+             <div class="complaint-examples">
+                 <h4>Ejemplos de Reclamos:</h4>
+                 <ul>
+                     <li>"En mi habitación 204, el baño no fue limpiado adecuadamente durante mi estadía del 15 al 18 de mayo..."</li>
+                     <li>"Hubo ruido excesivo en el pasillo del tercer piso entre las 23:00 y 01:00 horas del 22 de junio..."</li>
+                     <li>"La ducha de mi habitación 118 no proporcionaba agua caliente el 10 de abril..."</li>
+                 </ul>
+            </div>
+
+             <div class="suggestion-examples">
+                 <h4>Ejemplos de Sugerencias:</h4>
+                 <ul>
+                     <li>"Sería útil contar con un dispensador de agua potable en cada piso."</li>
+                     <li>"Sugiero añadir más ganchos para colgar ropa en los baños."</li>
+                     <li>"Podrían incluir opciones de desayuno local o típico boliviano."</li>
+                 </ul>
+            </div>
+        </section>
+    </div>
+    <!-- FIN PESTAÑA Reclamos y Sugerencias -->
+
+
     <footer>
-        <p>Residencial Arcángel Miguel - 2025</p>
+        <p>© 2024 Residencial Arcángel Miguel - Todos los derechos reservados.</p>
+         <p>Oruro - Bolivia</p>
     </footer>
-    
+
     <script>
+        // --- Tab Switching ---
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
-            
-            // Hide all tab content
+
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                 tabcontent[i].classList.remove("active");
             }
-            
-            // Remove active class from all tab links
+
             tablinks = document.getElementsByClassName("tab-link");
             for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                tablinks[i].classList.remove("active");
             }
-            
-            // Show the current tab and add "active" class to the button
-            document.getElementById(tabName).className += " active";
-            evt.currentTarget.className += " active";
+
+            const currentTab = document.getElementById(tabName);
+            if (currentTab) {
+                // Use timeout to allow CSS transition to be visible
+                 setTimeout(() => {
+                     currentTab.classList.add("active");
+                     // Trigger reflow for animation restart if re-clicking same tab (optional)
+                     // void currentTab.offsetWidth;
+                     // Trigger animations for elements within the newly opened tab
+                      triggerScrollAnimations(currentTab);
+                 }, 10); // Small delay
+            }
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add("active");
+            }
+
+            // Scroll to the top of the content area smoothly
+            const contentAreaTop = document.querySelector('nav').offsetTop + document.querySelector('nav').offsetHeight; // Below sticky nav
+            window.scrollTo({ top: contentAreaTop -10 , behavior: 'smooth' }); // Scroll just below nav
         }
-    </script>
-    <script>
+
+
+        // --- Dark Mode Toggle ---
         const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+         if (localStorage.getItem('darkMode') === 'enabled') {
+             body.classList.add('dark-mode');
+             toggleButton.textContent = 'Modo Claro';
+         } else {
+             toggleButton.textContent = 'Modo Oscuro';
+         }
+
         toggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
-        });
-    </script>
-    <script>
-        const backToTopButton = document.getElementById('backToTop');
-    
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.style.display = 'block';
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Modo Claro';
+                localStorage.setItem('darkMode', 'enabled');
             } else {
-                backToTopButton.style.display = 'none';
+                toggleButton.textContent = 'Modo Oscuro';
+                localStorage.setItem('darkMode', 'disabled');
             }
         });
-    </script>
-    <script>
-        // Carousel JavaScript
+
+        // --- Back to Top Button ---
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopButton.classList.add('visible');
+            } else {
+                 backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', (e) => {
+             e.preventDefault();
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+
+        // --- Carousel JavaScript ---
         document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.querySelector('.carousel');
-            const slides = document.querySelectorAll('.carousel-slide');
-            const prevButton = document.querySelector('.carousel-prev');
-            const nextButton = document.querySelector('.carousel-next');
-            const indicators = document.querySelectorAll('.carousel-indicator');
-            
-            let currentSlide = 0;
-            const slideCount = slides.length;
-            
-            function goToSlide(slideIndex) {
-                if (slideIndex < 0) {
-                    slideIndex = slideCount - 1;
-                } else if (slideIndex >= slideCount) {
-                    slideIndex = 0;
+            const carousels = document.querySelectorAll('.carousel-container');
+            carousels.forEach(container => {
+                const carousel = container.querySelector('.carousel');
+                const slides = container.querySelectorAll('.carousel-slide');
+                const prevButton = container.querySelector('.carousel-prev');
+                const nextButton = container.querySelector('.carousel-next');
+                const indicatorsContainer = container.querySelector('.carousel-indicators');
+                let indicators = [];
+                if (!carousel || !slides.length || !prevButton || !nextButton) return;
+                let currentSlide = 0;
+                const slideCount = slides.length;
+                let autoSlideInterval;
+
+                if (indicatorsContainer) {
+                     // Use existing indicators if they match slide count
+                     if (indicatorsContainer.children.length === slideCount) {
+                         indicators = Array.from(indicatorsContainer.children);
+                     } else {
+                          // Regenerate if count mismatch
+                         indicatorsContainer.innerHTML = '';
+                         for (let i = 0; i < slideCount; i++) {
+                             const indicator = document.createElement('div');
+                             indicator.classList.add('carousel-indicator');
+                             indicatorsContainer.appendChild(indicator);
+                             indicators.push(indicator);
+                         }
+                     }
+                     // Add event listeners
+                     indicators.forEach((indicator, index) => {
+                          indicator.addEventListener('click', () => {
+                              goToSlide(index);
+                              resetAutoSlide();
+                          });
+                     });
                 }
-                
-                carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
-                currentSlide = slideIndex;
-                
-                // Update indicators
-                indicators.forEach((indicator, index) => {
-                    if (index === currentSlide) {
-                        indicator.classList.add('active');
-                    } else {
-                        indicator.classList.remove('active');
-                    }
-                });
-            }
-            
-            prevButton.addEventListener('click', () => {
-                goToSlide(currentSlide - 1);
+
+                function updateIndicators() {
+                    indicators.forEach((indicator, index) => {
+                        indicator.classList.toggle('active', index === currentSlide);
+                    });
+                }
+
+                function goToSlide(slideIndex) {
+                    currentSlide = (slideIndex + slideCount) % slideCount; // Loop correctly
+                    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    updateIndicators();
+                }
+
+                function startAutoSlide() {
+                     stopAutoSlide();
+                     autoSlideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+                 }
+                 function stopAutoSlide() { clearInterval(autoSlideInterval); }
+                 function resetAutoSlide() { stopAutoSlide(); startAutoSlide(); }
+
+                prevButton.addEventListener('click', () => { goToSlide(currentSlide - 1); resetAutoSlide(); });
+                nextButton.addEventListener('click', () => { goToSlide(currentSlide + 1); resetAutoSlide(); });
+
+                goToSlide(0);
+                startAutoSlide();
+                container.addEventListener('mouseenter', stopAutoSlide);
+                container.addEventListener('mouseleave', startAutoSlide);
             });
-            
-            nextButton.addEventListener('click', () => {
-                goToSlide(currentSlide + 1);
-            });
-            
-            // Setup indicators click
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    goToSlide(index);
-                });
-            });
-            
-            // Auto slide every 5 seconds
-            setInterval(() => {
-                goToSlide(currentSlide + 1);
-            }, 5000);
         });
+
+         // --- Scroll Animations ---
+         let intersectionObserver; // Define observer globally or within DOMContentLoaded
+
+         function setupIntersectionObserver() {
+            const observerOptions = {
+                 root: null,
+                 rootMargin: '0px',
+                 threshold: 0.1
+             };
+
+             intersectionObserver = new IntersectionObserver((entries, observer) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         requestAnimationFrame(() => {
+                            const delay = entry.target.dataset.delay || 0;
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, parseInt(delay));
+                         });
+                         observer.unobserve(entry.target);
+                     }
+                 });
+             }, observerOptions);
+         }
+
+         function triggerScrollAnimations(parentElement = document) {
+             if (!intersectionObserver) setupIntersectionObserver(); // Setup observer if not already done
+             const targets = parentElement.querySelectorAll('.animate-on-scroll:not(.visible)'); // Select only non-visible targets within the parent
+             targets.forEach(target => intersectionObserver.observe(target));
+         }
+
+         document.addEventListener("DOMContentLoaded", function() {
+             setupIntersectionObserver(); // Initial setup
+             triggerScrollAnimations(); // Trigger for elements visible on initial load (in the active tab)
+         });
+
+
+         // --- Form Submission Handlers ---
+         document.addEventListener('DOMContentLoaded', function() {
+             // Contact Form
+             const contactForm = document.getElementById('contactForm');
+             if(contactForm) {
+                 contactForm.addEventListener('submit', function(e) {
+                     e.preventDefault();
+                     console.log('Contact Form Submitted');
+                     alert('Gracias por tu mensaje. Nos pondremos en contacto pronto.');
+                     this.reset();
+                 });
+             }
+
+             // Reclamos Form
+             const reclamosForm = document.getElementById('reclamos-form');
+             if(reclamosForm) {
+                 reclamosForm.addEventListener('submit', function(e) {
+                     e.preventDefault();
+                     console.log('Reclamos Form Submitted');
+                     alert('¡Gracias por su envío! Lo revisaremos pronto.');
+                     this.reset();
+                 });
+             }
+         });
+
     </script>
+
 </body>
 </html>
